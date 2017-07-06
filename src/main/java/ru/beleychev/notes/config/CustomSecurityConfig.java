@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.configurers
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import ru.beleychev.notes.service.NotesUserDetailService;
 
 import java.sql.ResultSet;
 
@@ -20,23 +21,7 @@ import java.sql.ResultSet;
  */
 @Configuration
 @EnableGlobalAuthentication
-public class JdbcSecurityConfig extends GlobalAuthenticationConfigurerAdapter {
-
-    @Bean
-    public UserDetailsService userDetailsService(JdbcTemplate jdbcTemplate) {
-        RowMapper<User> userRowMapper = (ResultSet rs, int i) ->
-                new User(
-                        rs.getString("username"),
-                        rs.getString("password"),
-                        true,
-                        true,
-                        true,
-                        true,
-                        AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_ADMIN")
-                );
-        return username ->
-                jdbcTemplate.queryForObject("select * from users where username = ?", userRowMapper, username);
-    }
+public class CustomSecurityConfig extends GlobalAuthenticationConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
