@@ -10,11 +10,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.beleychev.notes.domain.Role;
 import ru.beleychev.notes.domain.User;
 import ru.beleychev.notes.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -41,8 +41,11 @@ public class NotesUserDetailService implements UserDetailsService {
 
 	private List<GrantedAuthority> getGrantedAuthorities(User user) {
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-		grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
+		for (Role role : user.getRoles()) {
+			logger.info("Role : {}", role);
+			grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+		}
 		logger.info("authorities : {}", grantedAuthorities);
 		return grantedAuthorities;
 	}

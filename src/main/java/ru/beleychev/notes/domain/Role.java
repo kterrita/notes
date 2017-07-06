@@ -1,6 +1,7 @@
 package ru.beleychev.notes.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Yeap. My Project)
@@ -8,39 +9,39 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "roles")
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
-    private Long id;
+public class Role implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "role_id")
+	private Long id;
 
-    @Column(name = "role_name")
-    private String roleName;
+	@Column(name = "role_name")
+	private String roleName;
 
-    public Role() {
-    }
+	public Role() {
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getRoleName() {
-        return roleName;
-    }
+	public String getRoleName() {
+		return roleName;
+	}
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", roleName='" + roleName + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Role{" +
+		       "id=" + id +
+		       ", roleName='" + roleName + '\'' +
+		       '}';
+	}
 }
