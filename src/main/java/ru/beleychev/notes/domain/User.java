@@ -1,5 +1,9 @@
 package ru.beleychev.notes.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,10 +20,29 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private Long id;
+
 	@Column(name = "username")
+	@NotEmpty(message = "*Please provide username")
 	private String username;
+
 	@Column(name = "password")
+	@Length(min = 4, message = "*Your password must be at least 4 characters")
+	@NotEmpty(message = "*Please provide a password")
 	private String password;
+
+	@Column(name = "first_name")
+	@NotEmpty(message = "*Please provide your first name")
+	private String firstName;
+
+	@Column(name = "last_name")
+	@NotEmpty(message = "*Please provide your last name")
+	private String lastName;
+
+	@Column(name = "email")
+	@NotEmpty(message = "*Please provide an email")
+	@Email(message = "Please provide a valid email")
+	private String email;
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	private Set<Role> roles = new HashSet<>();
@@ -49,6 +72,30 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Set<Role> getRoles() {

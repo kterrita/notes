@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 
-    <form class="well form-horizontal" th:action="@{/registration}" action="/registration" method="post"  id="contact_form">
+    <form class="well form-horizontal" th:action="@{/registration}" action="#" th:object="${user}" method="post"  id="contact_form">
         <fieldset>
 
             <!-- Form Name -->
@@ -22,7 +22,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input  name="first_name" placeholder="First Name" class="form-control"  type="text"></input>
+                        <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" ></label>
+                        <input  name="firstName" th:field="*{firstName}" placeholder="First Name" class="form-control"  type="text"></input>
                     </div>
                 </div>
             </div>
@@ -34,7 +35,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="last_name" placeholder="Last Name" class="form-control"  type="text"></input>
+                        <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" ></label>
+                        <input name="lastName" th:field="*{lastName}" placeholder="Last Name" class="form-control"  type="text"></input>
                     </div>
                 </div>
             </div>
@@ -46,7 +48,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input  name="username" placeholder="Username" class="form-control"  type="text"></input>
+                        <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" ></label>
+                        <input  name="username" th:field="*{username}" placeholder="Username" class="form-control"  type="text"></input>
                     </div>
                 </div>
             </div>
@@ -58,7 +61,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="password" placeholder="Password" class="form-control"  type="password"></input>
+                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" ></label>
+                        <input name="password" th:field="*{password}" placeholder="Password" class="form-control"  type="password"></input>
                     </div>
                 </div>
             </div>
@@ -81,7 +85,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input name="email" placeholder="E-Mail Address" class="form-control"  type="text"></input>
+                        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></label>
+                        <input name="email" th:field="*{email}" placeholder="E-Mail Address" class="form-control"  type="text"></input>
                     </div>
                 </div>
             </div>
@@ -98,6 +103,8 @@
                     <button type="submit" class="btn btn-warning" >SUBMIT<span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
+
+            <span th:utext="${successMessage}"></span>
 
         </fieldset>
     </form>

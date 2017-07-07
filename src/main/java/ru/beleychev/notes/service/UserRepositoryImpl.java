@@ -14,8 +14,12 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 	private EntityManager manager;
 
 	public User findUserByName(String username) {
-		return (User) manager.createQuery(
-				"select u from User u where u.username = \'"+ username + "\'")
-				.getSingleResult();
+		try {
+			return (User) manager.createQuery(
+					"select u from User u where u.username = \'" + username + "\'")
+					.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }
