@@ -29,12 +29,8 @@ public class NotesUserDetailService implements UserDetailsService {
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user;
-		try {
-			user = userRepository.findUserByName(username);
-		} catch (Exception e) {
-			user = null;
-		}
+		User user = userRepository.findUserByName(username);
+
 		if (user == null) {
 			logger.info("User with username [{}] not found", username);
 			throw new UsernameNotFoundException("User not found");

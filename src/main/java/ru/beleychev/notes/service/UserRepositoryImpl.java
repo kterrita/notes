@@ -3,6 +3,7 @@ package ru.beleychev.notes.service;
 import ru.beleychev.notes.domain.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -14,8 +15,12 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 	private EntityManager manager;
 
 	public User findUserByName(String username) {
+		try {
 			return (User) manager.createQuery(
 					"select u from User u where u.username = \'" + username + "\'")
 					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 }
