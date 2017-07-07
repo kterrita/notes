@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.configurers
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.beleychev.notes.service.NotesUserDetailService;
 
 import java.sql.ResultSet;
@@ -25,9 +26,16 @@ public class CustomSecurityConfig extends GlobalAuthenticationConfigurerAdapter 
 
     @Autowired
     private UserDetailsService userDetailsService;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    	return new BCryptPasswordEncoder();
+    }
 
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 }
