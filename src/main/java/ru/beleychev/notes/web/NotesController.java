@@ -15,6 +15,7 @@ import ru.beleychev.notes.repository.UserRepository;
 public class NotesController {
     private static final String VIEW_NOTES = "notes";
     private static final String VIEW_LOGIN = "login";
+    private static final String VIEW_REGISTRATION = "registration";
 
     @Autowired
     private UserRepository userRepository;
@@ -29,6 +30,12 @@ public class NotesController {
     @RequestMapping(value="/login")
     public ModelAndView login(ModelAndView modelAndView){
         modelAndView.setViewName(VIEW_LOGIN);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/registration")
+    public ModelAndView registration(ModelAndView modelAndView) {
+        modelAndView.setViewName(VIEW_REGISTRATION);
         return modelAndView;
     }
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration from</title>
+    <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap-glyphicons.css"></link>
+    <link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+<div class="container">
+
+    <form class="well form-horizontal" th:action="@{/registration}" action="/registration" method="post"  id="contact_form">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend><center><h2><b>Registration Form</b></h2></center></legend><br></br>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">First Name</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="first_name" placeholder="First Name" class="form-control"  type="text"></input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" >Last Name</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="last_name" placeholder="Last Name" class="form-control"  type="text"></input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Username</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="username" placeholder="Username" class="form-control"  type="text"></input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" >Password</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="password" placeholder="Password" class="form-control"  type="password"></input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" >Confirm Password</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="confirmPassword" placeholder="Confirm Password" class="form-control"  type="password"></input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">E-Mail</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input name="email" placeholder="E-Mail Address" class="form-control"  type="text"></input>
+                    </div>
+                </div>
+            </div>
+
+<!--
+            &lt;!&ndash; Success message &ndash;&gt;
+            <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Success!.</div>
+-->
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4"><br></br>
+                    <button type="submit" class="btn btn-warning" >SUBMIT<span class="glyphicon glyphicon-send"></span></button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
