@@ -1,5 +1,7 @@
 package ru.beleychev.notes.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.Set;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -33,5 +36,6 @@ public class UserServiceImpl implements UserService {
         roles.add(defaultRole);
         user.setRoles(roles);
         userRepository.save(user);
+        logger.info("User saved successfully, user details: [{}]", user);
     }
 }

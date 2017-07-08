@@ -67,7 +67,6 @@ public class NotesController {
 			return modelAndView;
 		}
 		if (!bindingResult.hasErrors()) {
-			//TODO сохранять в БД, присвоить роль, и сохранить в таблице roles-users
 			userService.saveNewUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
