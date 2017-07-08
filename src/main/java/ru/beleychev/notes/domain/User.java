@@ -21,7 +21,7 @@ public class User implements Serializable {
 	@Column(name = "user_id")
 	private Long id;
 
-	@Column(name = "username")
+	@Column(name = "username", unique = true)
 	@NotEmpty(message = "*Please provide username")
 	private String username;
 

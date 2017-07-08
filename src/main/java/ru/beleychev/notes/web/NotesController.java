@@ -11,6 +11,7 @@ import ru.beleychev.notes.domain.Role;
 import ru.beleychev.notes.domain.User;
 import ru.beleychev.notes.repository.RoleRepository;
 import ru.beleychev.notes.repository.UserRepository;
+import ru.beleychev.notes.service.UserService;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -31,6 +32,8 @@ public class NotesController {
 	private RoleRepository roleRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
@@ -65,8 +68,7 @@ public class NotesController {
 		}
 		if (!bindingResult.hasErrors()) {
 			//TODO сохранять в БД, присвоить роль, и сохранить в таблице roles-users
-			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-			userRepository.save(user);
+			userService.saveNewUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 		}
