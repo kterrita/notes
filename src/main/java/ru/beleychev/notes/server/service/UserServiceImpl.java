@@ -1,14 +1,14 @@
-package ru.beleychev.notes.service;
+package ru.beleychev.notes.server.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.beleychev.notes.domain.Role;
-import ru.beleychev.notes.domain.User;
-import ru.beleychev.notes.repository.RoleRepository;
-import ru.beleychev.notes.repository.UserRepository;
+import ru.beleychev.notes.server.domain.Role;
+import ru.beleychev.notes.server.domain.User;
+import ru.beleychev.notes.server.repository.RoleRepository;
+import ru.beleychev.notes.server.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveNewUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        Role defaultRole = roleRepository.findOne(1L);
+        Role defaultRole = roleRepository.findOne(4L);
         Set<Role> roles = new HashSet<>();
         roles.add(defaultRole);
         user.setRoles(roles);

@@ -1,4 +1,4 @@
-package ru.beleychev.notes.service;
+package ru.beleychev.notes.server.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.beleychev.notes.domain.Role;
-import ru.beleychev.notes.domain.User;
-import ru.beleychev.notes.repository.UserRepository;
+import ru.beleychev.notes.server.domain.Role;
+import ru.beleychev.notes.server.domain.User;
+import ru.beleychev.notes.server.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package ru.beleychev.notes.repository;
+package ru.beleychev.notes.server.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.beleychev.notes.domain.Role;
+import ru.beleychev.notes.server.domain.Role;
 
 /**
  * Yeap. My Project)

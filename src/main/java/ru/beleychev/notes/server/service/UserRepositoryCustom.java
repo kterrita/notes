@@ -1,6 +1,6 @@
-package ru.beleychev.notes.service;
+package ru.beleychev.notes.server.service;
 
-import ru.beleychev.notes.domain.User;
+import ru.beleychev.notes.server.domain.User;
 
 /**
  * Yeap. My Project)

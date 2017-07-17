@@ -1,4 +1,4 @@
-package ru.beleychev.notes.config;
+package ru.beleychev.notes.server.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

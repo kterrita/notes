@@ -1,4 +1,4 @@
-package ru.beleychev.notes.util;
+package ru.beleychev.notes.server.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

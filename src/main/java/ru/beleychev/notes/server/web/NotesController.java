@@ -1,4 +1,4 @@
-package ru.beleychev.notes.web;
+package ru.beleychev.notes.server.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -7,14 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import ru.beleychev.notes.domain.Role;
-import ru.beleychev.notes.domain.User;
-import ru.beleychev.notes.repository.RoleRepository;
-import ru.beleychev.notes.repository.UserRepository;
-import ru.beleychev.notes.service.UserService;
+import ru.beleychev.notes.server.domain.User;
+import ru.beleychev.notes.server.repository.RoleRepository;
+import ru.beleychev.notes.server.repository.UserRepository;
+import ru.beleychev.notes.server.service.UserService;
 
 import javax.validation.Valid;
-import java.util.HashSet;
 
 /**
  * Yeap. My Project)

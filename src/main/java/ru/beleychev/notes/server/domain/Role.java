@@ -1,4 +1,4 @@
-package ru.beleychev.notes.domain;
+package ru.beleychev.notes.server.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

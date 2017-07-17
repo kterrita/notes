@@ -1,8 +1,8 @@
-package ru.beleychev.notes.repository;
+package ru.beleychev.notes.server.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.beleychev.notes.domain.User;
-import ru.beleychev.notes.service.UserRepositoryCustom;
+import ru.beleychev.notes.server.domain.User;
+import ru.beleychev.notes.server.service.UserRepositoryCustom;
 
 /**
  * Yeap. My Project)
