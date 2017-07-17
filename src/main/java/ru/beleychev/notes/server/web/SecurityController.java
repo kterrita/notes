@@ -12,15 +12,16 @@ import ru.beleychev.notes.server.repository.RoleRepository;
 import ru.beleychev.notes.server.repository.UserRepository;
 import ru.beleychev.notes.server.service.UserService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 /**
  * Yeap. My Project)
  * Created by ilya on 05.07.2017.
  */
 @RestController
-public class NotesController {
-	private static final String VIEW_NOTES = "notes";
+public class SecurityController {
 	private static final String VIEW_LOGIN = "login";
 	private static final String VIEW_REGISTRATION = "registration";
 
@@ -34,10 +35,8 @@ public class NotesController {
 	private UserService userService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index(ModelAndView modelAndView) {
-		modelAndView.setViewName(VIEW_NOTES);
-		modelAndView.addObject("journal", userRepository.findAll());
-		return modelAndView;
+	public void index(HttpServletResponse response) throws IOException {
+		response.sendRedirect("/notes");
 	}
 
 	@RequestMapping(value = "/login")
