@@ -23,13 +23,13 @@ public class SpringForGwtConfig {
 	public HandlerMapping simpleUrlHandlerMapping() {
 		SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
 		Map<String, Controller> map = new HashMap<>();
-		map.put("/notes", springGwtController());
+		map.put("/notes", notesGwtController());
 		simpleUrlHandlerMapping.setUrlMap(map);
 		return simpleUrlHandlerMapping;
 	}
 
 	@Bean
-	public NotesGwtController springGwtController() {
+	public NotesGwtController notesGwtController() {
 		NotesGwtController notesGwtController = new NotesGwtController();
 		notesGwtController.setRemoteService(notesService());
 		return notesGwtController;
