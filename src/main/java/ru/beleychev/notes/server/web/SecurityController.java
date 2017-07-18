@@ -22,53 +22,55 @@ import java.io.IOException;
  */
 @RestController
 public class SecurityController {
-	private static final String VIEW_LOGIN = "login";
-	private static final String VIEW_REGISTRATION = "registration";
+    private static final String VIEW_LOGIN = "login";
+    private static final String VIEW_REGISTRATION = "registration";
+    private static final String VIEW_NOTES = "notesgwtapp";
 
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private RoleRepository roleRepository;
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserService userService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public void index(HttpServletResponse response) throws IOException {
-		response.sendRedirect("/notes");
-	}
+    @RequestMapping(value = "/notes")
+    public ModelAndView index(ModelAndView modelAndView) throws IOException {
+        modelAndView.setViewName(VIEW_NOTES);
+        return modelAndView;
+    }
 
-	@RequestMapping(value = "/login")
-	public ModelAndView login(ModelAndView modelAndView) {
-		modelAndView.setViewName(VIEW_LOGIN);
-		return modelAndView;
-	}
+    @RequestMapping(value = "/login")
+    public ModelAndView login(ModelAndView modelAndView) {
+        modelAndView.setViewName(VIEW_LOGIN);
+        return modelAndView;
+    }
 
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
-	public ModelAndView registration(ModelAndView modelAndView) {
-		modelAndView.setViewName(VIEW_REGISTRATION);
-		modelAndView.addObject("user", new User());
-		return modelAndView;
-	}
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public ModelAndView registration(ModelAndView modelAndView) {
+        modelAndView.setViewName(VIEW_REGISTRATION);
+        modelAndView.addObject("user", new User());
+        return modelAndView;
+    }
 
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName(VIEW_REGISTRATION);
-		User userExists = userRepository.findUserByName(user.getUsername());
-		if (userExists != null) {
-			bindingResult
-					.rejectValue("username", "error.user",
-							"There is already a user registered with the username provided");
-			return modelAndView;
-		}
-		if (!bindingResult.hasErrors()) {
-			userService.saveNewUser(user);
-			modelAndView.addObject("successMessage", "User has been registered successfully");
-			modelAndView.addObject("user", new User());
-		}
-		userRepository.save(user);
-		return modelAndView;
-	}
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(VIEW_REGISTRATION);
+        User userExists = userRepository.findUserByName(user.getUsername());
+        if (userExists != null) {
+            bindingResult
+                    .rejectValue("username", "error.user",
+                            "There is already a user registered with the username provided");
+            return modelAndView;
+        }
+        if (!bindingResult.hasErrors()) {
+            userService.saveNewUser(user);
+            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("user", new User());
+        }
+        userRepository.save(user);
+        return modelAndView;
+    }
 }
