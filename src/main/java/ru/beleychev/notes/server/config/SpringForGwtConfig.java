@@ -23,7 +23,7 @@ public class SpringForGwtConfig {
 	public HandlerMapping simpleUrlHandlerMapping() {
 		SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
 		Map<String, Controller> map = new HashMap<>();
-		map.put("/notes", notesGwtController());
+		map.put("/", notesGwtController());
 		simpleUrlHandlerMapping.setUrlMap(map);
 		return simpleUrlHandlerMapping;
 	}

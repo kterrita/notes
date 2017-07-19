@@ -7,7 +7,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * TODO: comment
  * @author beleychev.ilya 17.07.2017   15:09
  */
-@RemoteServiceRelativePath("/notes")
+@RemoteServiceRelativePath("/")
 public interface NotesGwtService extends RemoteService {
 	String get();
 }

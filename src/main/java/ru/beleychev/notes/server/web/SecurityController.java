@@ -35,7 +35,7 @@ public class SecurityController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/notes")
+	@RequestMapping(value = "/")
 	public ModelAndView index(ModelAndView modelAndView) {
 		modelAndView.setViewName(VIEW_NOTES);
 		return modelAndView;

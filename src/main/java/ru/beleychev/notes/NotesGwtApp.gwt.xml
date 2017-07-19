@@ -17,7 +17,7 @@
 
 	<!-- Specify the paths for translatable code                    -->
 	<source path='client'/>
-	<servlet path="/notes"
+	<servlet path="/"
 	         class="ru.beleychev.notes.server.service.NotesGwtServiceImpl"/>
 
 </module>
