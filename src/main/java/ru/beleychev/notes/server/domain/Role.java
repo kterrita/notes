@@ -1,5 +1,7 @@
 package ru.beleychev.notes.server.domain;
 
+import ru.beleychev.notes.client.dto.RoleDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,6 +21,11 @@ public class Role implements Serializable {
 	private String roleName;
 
 	public Role() {
+	}
+
+	public Role(RoleDTO roleDTO) {
+		this.id = roleDTO.getId();
+		this.roleName = roleDTO.getRoleName();
 	}
 
 	public Long getId() {

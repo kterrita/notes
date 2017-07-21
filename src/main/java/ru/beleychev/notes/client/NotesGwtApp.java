@@ -2,6 +2,7 @@ package ru.beleychev.notes.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
@@ -11,6 +12,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import ru.beleychev.notes.client.dto.UserDTO;
 
 /**
  * Main gwt class with UI building
@@ -42,11 +44,12 @@ public class NotesGwtApp implements EntryPoint {
 	private Button recycleBin = new Button("Recycle bin");
 	private VerticalPanel navigationPanel = new VerticalPanel();
 	// элементы listPanel
-	//private DataGrid<User> notesList= new DataGrid<>();
+	private DataGrid<UserDTO> notesList= new DataGrid<>();
 	private ScrollPanel listPanel = new ScrollPanel();
 
 	@Override
 	public void onModuleLoad() {
+		//notesList.addColumn(new Column<UserDTO, String>(), "First Name");
 		RootPanel.get();
 	}
 }

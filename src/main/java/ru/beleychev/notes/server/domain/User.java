@@ -3,6 +3,8 @@ package ru.beleychev.notes.server.domain;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import ru.beleychev.notes.client.dto.RoleDTO;
+import ru.beleychev.notes.client.dto.UserDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -48,6 +50,23 @@ public class User implements Serializable {
 	private Set<Role> roles = new HashSet<>();
 
 	public User() {
+	}
+
+	public User(UserDTO userDTO) {
+		this.id = userDTO.getId();
+		this.username = userDTO.getUsername();
+		this.password = userDTO.getPassword();
+		this.firstName = userDTO.getFirstName();
+		this.lastName = userDTO.getLastName();
+		this.email = userDTO.getEmail();
+		Set<RoleDTO> roleDTOs = userDTO.getRoles();
+		if (roleDTOs != null) {
+			Set<Role> roles = new HashSet<>(roleDTOs.size());
+			for (RoleDTO roleDTO : roleDTOs) {
+				roles.add(new Role(roleDTO));
+			}
+			this.roles = roles;
+		}
 	}
 
 	public Long getId() {
