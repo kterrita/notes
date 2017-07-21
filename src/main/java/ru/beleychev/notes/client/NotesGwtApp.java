@@ -2,25 +2,37 @@ package ru.beleychev.notes.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.*;
 
 /**
- * TODO: comment
+ * Main gwt class with UI building
  * @author beleychev.ilya 17.07.2017   16:07
+ * @since 17.07.2017
+ * @version 1.0
  */
 public class NotesGwtApp implements EntryPoint {
+	// главная панель
+	private VerticalPanel mainPanel = new VerticalPanel();
+	// панель север, юг, навигация, контент
+	private DockLayoutPanel addPanel = new DockLayoutPanel(Style.Unit.EM);
+	private HorizontalPanel northPanel = new HorizontalPanel();
+	// элементы userAndTimeInfo
+	private Label user = new Label();
+	private Label time = new Label();
+	private VerticalPanel userAndTimeInfo = new VerticalPanel();
+	// элементы searchAndFilter
+	private TextBox searchBox = new TextBox();
+	private Button searchButton = new Button();
+	private HorizontalPanel searchAndFilter = new HorizontalPanel();
+
+	private HorizontalPanel southPanel = new HorizontalPanel();
+	private VerticalPanel navigationPanel = new VerticalPanel();
+	private ScrollPanel listPanel = new ScrollPanel();
 	@Override
 	public void onModuleLoad() {
 
-		DockLayoutPanel p = new DockLayoutPanel(Style.Unit.EM);
-		p.addNorth(new HTML("header"), 2);
-		p.addSouth(new HTML("footer"), 2);
-		p.addWest(new HTML("navigation"), 10);
-		p.add(new HTML("OMG IT WORKS!"));
-		p.setTitle("Hello World");
 
-		RootPanel.get().add(p);
+
+		RootPanel.get();
 	}
 }
