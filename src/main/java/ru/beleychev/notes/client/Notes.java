@@ -1,6 +1,5 @@
 package ru.beleychev.notes.client;
 
-import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -16,10 +15,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.view.client.ListDataProvider;
 import ru.beleychev.notes.client.dto.UserDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +25,7 @@ import java.util.List;
  * @version 1.0
  * @since 17.07.2017
  */
-public class NotesGwtApp implements EntryPoint {
+public class Notes implements EntryPoint {
 	// главная панель
 	private VerticalPanel mainPanel = new VerticalPanel();
 	// панель север, юг, навигация, контент
