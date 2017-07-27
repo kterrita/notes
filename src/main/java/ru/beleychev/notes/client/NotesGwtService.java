@@ -12,7 +12,7 @@ import java.util.List;
  * @since 17.07.2017
  * @version 1.0
  */
-@RemoteServiceRelativePath("notes")
+@RemoteServiceRelativePath("notes.rpc")
 public interface NotesGwtService extends RemoteService {
 	/**
 	 * Wrapper for {@link ru.beleychev.notes.server.repository.UserRepository}

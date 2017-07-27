@@ -24,7 +24,7 @@ import java.io.IOException;
 public class SecurityController {
 	private static final String VIEW_LOGIN = "login";
 	private static final String VIEW_REGISTRATION = "registration";
-//	private static final String VIEW_NOTES = "notes";
+	private static final String VIEW_NOTES = "notes";
 
 	@Autowired
 	private UserRepository userRepository;
@@ -35,11 +35,11 @@ public class SecurityController {
 	@Autowired
 	private UserService userService;
 
-	/*@RequestMapping(value = "/")
+	@RequestMapping(value = "/notes")
 	public ModelAndView index(ModelAndView modelAndView) {
 		modelAndView.setViewName(VIEW_NOTES);
 		return modelAndView;
-	}*/
+	}
 
 	@RequestMapping(value = "/login")
 	public ModelAndView login(ModelAndView modelAndView) {

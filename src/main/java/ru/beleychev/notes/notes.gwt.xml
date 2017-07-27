@@ -18,7 +18,7 @@
 	<!-- Specify the paths for translatable code                    -->
 	<source path='client'/>
 	<source path='shared'/>
-	<servlet path="/notes"
+	<servlet path="/notes.rpc"
 	         class="ru.beleychev.notes.server.service.NotesGwtServiceImpl"/>
 
 </module>
