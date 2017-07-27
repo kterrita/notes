@@ -1,6 +1,6 @@
 package ru.beleychev.notes.server.domain;
 
-import ru.beleychev.notes.client.dto.RoleDTO;
+import ru.beleychev.notes.shared.dto.RoleDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;

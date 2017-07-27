@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 				.antMatchers("/api/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/notes").authenticated()
-				.antMatchers("/notes/notes.rpc").anonymous()
+				.antMatchers("/notes/notes.rpc").authenticated()
 					.and()
 				.formLogin()
 				.loginPage("/login").permitAll()

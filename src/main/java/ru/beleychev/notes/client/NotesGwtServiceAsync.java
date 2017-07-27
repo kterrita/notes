@@ -1,7 +1,7 @@
 package ru.beleychev.notes.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import ru.beleychev.notes.client.dto.UserDTO;
+import ru.beleychev.notes.shared.dto.UserDTO;
 
 import java.util.List;
 

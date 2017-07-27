@@ -1,9 +1,6 @@
-package ru.beleychev.notes.client.dto;
-
-import ru.beleychev.notes.server.domain.Role;
+package ru.beleychev.notes.shared.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -22,7 +19,7 @@ public class UserDTO implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
-    private Set<RoleDTO> roles = new HashSet<>();
+    private Set<RoleDTO> roles;
 
     public UserDTO() {
     }

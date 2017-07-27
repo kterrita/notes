@@ -1,8 +1,8 @@
 package ru.beleychev.notes.server.service;
 
 import ru.beleychev.notes.client.NotesGwtService;
-import ru.beleychev.notes.client.dto.RoleDTO;
-import ru.beleychev.notes.client.dto.UserDTO;
+import ru.beleychev.notes.shared.dto.RoleDTO;
+import ru.beleychev.notes.shared.dto.UserDTO;
 import ru.beleychev.notes.server.domain.Role;
 import ru.beleychev.notes.server.domain.User;
 import ru.beleychev.notes.server.repository.UserRepository;

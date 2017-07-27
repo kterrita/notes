@@ -1,4 +1,4 @@
-package ru.beleychev.notes.client.dto;
+package ru.beleychev.notes.shared.dto;
 
 import java.io.Serializable;
 

@@ -3,8 +3,8 @@ package ru.beleychev.notes.server.domain;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import ru.beleychev.notes.client.dto.RoleDTO;
-import ru.beleychev.notes.client.dto.UserDTO;
+import ru.beleychev.notes.shared.dto.RoleDTO;
+import ru.beleychev.notes.shared.dto.UserDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -45,7 +45,7 @@ public class User implements Serializable {
 	@Email(message = "Please provide a valid email")
 	private String email;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	private Set<Role> roles = new HashSet<>();
 
