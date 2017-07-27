@@ -1,12 +1,13 @@
 package ru.beleychev.notes.shared.dto;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 
 /**
  * Yeap. My Project)
  * Created by ilya on 21.07.2017.
  */
-public class RoleDTO implements Serializable {
+public class RoleDTO implements IsSerializable {
     private Long id;
     private String roleName;
 

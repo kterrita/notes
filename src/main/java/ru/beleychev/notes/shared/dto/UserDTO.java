@@ -1,6 +1,7 @@
 package ru.beleychev.notes.shared.dto;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import java.util.Set;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Set;
  * @version 1.0
  * @since 21.07.17
  */
-public class UserDTO implements Serializable {
+public class UserDTO implements IsSerializable {
 
     private Long id;
     private String username;
