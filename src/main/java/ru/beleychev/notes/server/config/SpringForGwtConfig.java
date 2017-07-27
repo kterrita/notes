@@ -1,7 +1,10 @@
 package ru.beleychev.notes.server.config;
 
+import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.mvc.Controller;
@@ -23,9 +26,14 @@ public class SpringForGwtConfig {
 	public HandlerMapping simpleUrlHandlerMapping() {
 		SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
 		Map<String, Controller> map = new HashMap<>();
-		map.put("/**/notes.rpc", notesGwtController());
+		map.put("/notes/notes.rpc", notesGwtController());
 		simpleUrlHandlerMapping.setUrlMap(map);
 		return simpleUrlHandlerMapping;
+	}
+
+	@Bean
+	public ServletRegistrationBean gwtServlet() {
+		return new ServletRegistrationBean(notesGwtController(), "/notes/notes.rpc");
 	}
 
 	@Bean

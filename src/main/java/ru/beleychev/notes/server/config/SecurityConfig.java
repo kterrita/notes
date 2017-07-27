@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 				.antMatchers("/api/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/notes").authenticated()
-				.antMatchers("/notes/notes.rpc").authenticated()
+				.antMatchers("/notes/notes.rpc").anonymous()
 					.and()
 				.formLogin()
 				.loginPage("/login").permitAll()
@@ -42,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout().permitAll()
 					.and()
 				.rememberMe().tokenRepository(persistentTokenRepository)
-				.tokenValiditySeconds(24 * 60 * 3600);
+				.tokenValiditySeconds(24 * 60 * 3600)
+					.and()
+				.csrf().disable();
 	}
 
 	@Bean
