@@ -1,3 +1,6 @@
-.div
-{
+.mainPanel {
+  background-color: #2062B8;
+  color: black;
+  font-style: italic;
+  padding: 5px;
 }

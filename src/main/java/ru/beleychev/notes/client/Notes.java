@@ -45,7 +45,6 @@ public class Notes implements EntryPoint {
     private VerticalPanel navigationPanel = new VerticalPanel();
     // элементы listPanel
     private DataGrid<UserDTO> notesList = new DataGrid<>();
-    private ScrollPanel listPanel = new ScrollPanel();
 
     private NotesGwtServiceAsync notesGwtServiceAsync = GWT.create(NotesGwtService.class);
 
@@ -58,7 +57,17 @@ public class Notes implements EntryPoint {
             }
         };
         firstNameColumn.setSortable(true);
+
+        Column<UserDTO, String> emailColumn = new Column<UserDTO, String>(new TextCell()) {
+	        @Override
+	        public String getValue(UserDTO userDTO) {
+		        return userDTO.getEmail();
+	        }
+        };
+        emailColumn.setSortable(true);
+
         notesList.addColumn(firstNameColumn, "First name");
+        notesList.addColumn(emailColumn, "Email");
         if (notesGwtServiceAsync == null) {
             notesGwtServiceAsync = GWT.create(NotesGwtService.class);
         }
@@ -72,7 +81,7 @@ public class Notes implements EntryPoint {
             public void onSuccess(List<UserDTO> result) {
                 notesList.setRowCount(result.size(), true);
                 notesList.setRowData(0, result);
-                notesList.setWidth("100%");
+                notesList.setWidth("300px");
                 user.setText(result.get(0).getUsername());
                 time.setText("28 July 2017");
             }
@@ -81,22 +90,25 @@ public class Notes implements EntryPoint {
 
         userAndTimeInfo.add(user);
         userAndTimeInfo.add(time);
+        userAndTimeInfo.setWidth("200px");
 
         searchAndFilter.add(searchBox);
         searchAndFilter.add(searchButton);
+        searchAndFilter.setWidth("200px");
 
         northPanel.add(userAndTimeInfo);
         northPanel.add(searchAndFilter);
+        northPanel.setWidth("410px");
 
         southPanel.add(allRightsReservedLabel);
+        southPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        southPanel.setWidth("410px");
 
         navigationPanel.add(allNotes);
         navigationPanel.add(important);
         navigationPanel.add(favorite);
         navigationPanel.add(recycleBin);
-
-        //listPanel.add(notesList);
-        //listPanel.setWidth("100%");
+        navigationPanel.setWidth("100px");
 
         addPanel.addNorth(northPanel, 2);
         addPanel.addSouth(southPanel, 2);
@@ -104,6 +116,8 @@ public class Notes implements EntryPoint {
         addPanel.add(notesList);
 
         mainPanel.add(addPanel);
+        mainPanel.addStyleName("mainPanel");
+        mainPanel.setWidth("410px");
 
         RootLayoutPanel.get().add(mainPanel);
     }
