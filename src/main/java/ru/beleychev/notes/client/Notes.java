@@ -81,7 +81,7 @@ public class Notes implements EntryPoint {
             public void onSuccess(List<UserDTO> result) {
                 notesList.setRowCount(result.size(), true);
                 notesList.setRowData(0, result);
-                notesList.setWidth("300px");
+                notesList.setWidth("800px");
                 user.setText(result.get(0).getUsername());
                 time.setText("28 July 2017");
             }
@@ -90,25 +90,31 @@ public class Notes implements EntryPoint {
 
         userAndTimeInfo.add(user);
         userAndTimeInfo.add(time);
-        userAndTimeInfo.setWidth("200px");
+        userAndTimeInfo.setWidth("450px");
+        userAndTimeInfo.setHeight("250px");
 
         searchAndFilter.add(searchBox);
         searchAndFilter.add(searchButton);
-        searchAndFilter.setWidth("200px");
+        searchAndFilter.setWidth("450px");
+        searchAndFilter.setHeight("250px");
+
 
         northPanel.add(userAndTimeInfo);
         northPanel.add(searchAndFilter);
-        northPanel.setWidth("410px");
+        northPanel.setWidth("910px");
+        northPanel.setHeight("210px");
 
         southPanel.add(allRightsReservedLabel);
         southPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        southPanel.setWidth("410px");
+        southPanel.setWidth("910px");
+        southPanel.setHeight("50px");
 
         navigationPanel.add(allNotes);
         navigationPanel.add(important);
         navigationPanel.add(favorite);
         navigationPanel.add(recycleBin);
         navigationPanel.setWidth("100px");
+        navigationPanel.setHeight("400px");
 
         addPanel.addNorth(northPanel, 2);
         addPanel.addSouth(southPanel, 2);
@@ -117,7 +123,8 @@ public class Notes implements EntryPoint {
 
         mainPanel.add(addPanel);
         mainPanel.addStyleName("mainPanel");
-        mainPanel.setWidth("410px");
+        mainPanel.setWidth("910px");
+        mainPanel.setHeight("710px");
 
         RootLayoutPanel.get().add(mainPanel);
     }
