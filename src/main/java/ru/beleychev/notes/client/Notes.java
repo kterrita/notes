@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class Notes implements EntryPoint {
     // главная панель
-    private VerticalPanel mainPanel = new VerticalPanel();
+    private SimpleLayoutPanel mainPanel = new SimpleLayoutPanel();
     // панель север, юг, навигация, контент
     private DockLayoutPanel addPanel = new DockLayoutPanel(Style.Unit.EM);
     private HorizontalPanel northPanel = new HorizontalPanel();
@@ -35,7 +35,7 @@ public class Notes implements EntryPoint {
     private Button searchButton = new Button("Search");
     private HorizontalPanel searchAndFilter = new HorizontalPanel();
     // элементы southPanel
-    private Label allRightsReservedLabel = new Label();
+    private Label allRightsReservedLabel = new Label("All rights reserved");
     private HorizontalPanel southPanel = new HorizontalPanel();
     // элементы navigationPanel
     private Button allNotes = new Button("All notes");
@@ -53,8 +53,8 @@ public class Notes implements EntryPoint {
     public void onModuleLoad() {
         Column<UserDTO, String> firstNameColumn = new Column<UserDTO, String>(new TextCell()) {
             @Override
-            public String getValue(UserDTO object) {
-                return object.getFirstName();
+            public String getValue(UserDTO userDTO) {
+                return userDTO.getFirstName();
             }
         };
         firstNameColumn.setSortable(true);
@@ -73,14 +73,38 @@ public class Notes implements EntryPoint {
                 notesList.setRowCount(result.size(), true);
                 notesList.setRowData(0, result);
                 notesList.setWidth("100%");
+                user.setText(result.get(0).getUsername());
+                time.setText("28 July 2017");
             }
         };
         notesGwtServiceAsync.listUsers(callback);
 
-        /*mainPanel.setWidth("100%");
-        mainPanel.add(notesList);*/
-        SimpleLayoutPanel layoutPanel = new SimpleLayoutPanel();
-        layoutPanel.add(notesList);
-        RootLayoutPanel.get().add(layoutPanel);
+        userAndTimeInfo.add(user);
+        userAndTimeInfo.add(time);
+
+        searchAndFilter.add(searchBox);
+        searchAndFilter.add(searchButton);
+
+        northPanel.add(userAndTimeInfo);
+        northPanel.add(searchAndFilter);
+
+        southPanel.add(allRightsReservedLabel);
+
+        navigationPanel.add(allNotes);
+        navigationPanel.add(important);
+        navigationPanel.add(favorite);
+        navigationPanel.add(recycleBin);
+
+        //listPanel.add(notesList);
+        //listPanel.setWidth("100%");
+
+        addPanel.addNorth(northPanel, 2);
+        addPanel.addSouth(southPanel, 2);
+        addPanel.addWest(navigationPanel, 10);
+        addPanel.add(notesList);
+
+        mainPanel.add(addPanel);
+
+        RootLayoutPanel.get().add(mainPanel);
     }
 }
