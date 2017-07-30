@@ -11,6 +11,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import ru.beleychev.notes.shared.dto.UserDTO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class Notes implements EntryPoint {
     private HorizontalPanel northPanel = new HorizontalPanel();
     // элементы userAndTimeInfo
     private Label user = new Label();
-    private Label time = new Label();
+    private DateLabel time = new DateLabel();
     private VerticalPanel userAndTimeInfo = new VerticalPanel();
     // элементы searchAndFilter
     private TextBox searchBox = new TextBox();
@@ -81,50 +82,38 @@ public class Notes implements EntryPoint {
             public void onSuccess(List<UserDTO> result) {
                 notesList.setRowCount(result.size(), true);
                 notesList.setRowData(0, result);
-                notesList.setWidth("800px");
                 user.setText(result.get(0).getUsername());
-                time.setText("28 July 2017");
+                time.setValue(new Date());
             }
         };
         notesGwtServiceAsync.listUsers(callback);
 
-        userAndTimeInfo.add(user);
+/*        userAndTimeInfo.add(user);
         userAndTimeInfo.add(time);
-        userAndTimeInfo.setWidth("450px");
-        userAndTimeInfo.setHeight("250px");
 
         searchAndFilter.add(searchBox);
         searchAndFilter.add(searchButton);
-        searchAndFilter.setWidth("450px");
-        searchAndFilter.setHeight("250px");
 
 
         northPanel.add(userAndTimeInfo);
         northPanel.add(searchAndFilter);
-        northPanel.setWidth("910px");
-        northPanel.setHeight("210px");
 
         southPanel.add(allRightsReservedLabel);
         southPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        southPanel.setWidth("910px");
-        southPanel.setHeight("50px");
+
 
         navigationPanel.add(allNotes);
         navigationPanel.add(important);
         navigationPanel.add(favorite);
         navigationPanel.add(recycleBin);
-        navigationPanel.setWidth("100px");
-        navigationPanel.setHeight("400px");
 
-        addPanel.addNorth(northPanel, 2);
-        addPanel.addSouth(southPanel, 2);
-        addPanel.addWest(navigationPanel, 10);
+        addPanel.addNorth(northPanel, 5);
+        addPanel.addSouth(southPanel, 5);
+        addPanel.addWest(navigationPanel, 15);
         addPanel.add(notesList);
 
         mainPanel.add(addPanel);
-        mainPanel.addStyleName("mainPanel");
-        mainPanel.setWidth("910px");
-        mainPanel.setHeight("710px");
+        mainPanel.addStyleName("mainPanel");*/
 
         RootLayoutPanel.get().add(mainPanel);
     }
