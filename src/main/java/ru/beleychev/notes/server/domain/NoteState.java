@@ -1,8 +1,17 @@
 package ru.beleychev.notes.server.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.io.Serializable;
+
 /**
- * TODO: comment
+ * Note State entity
  * @author beleychev.ilya 31.07.2017   13:42
  */
-public class NoteState {
+@Entity
+@Table(name = "note_states")
+public class NoteState implements Serializable {
+	private Long id;
+	private String description;
+	private String systemName;
 }
