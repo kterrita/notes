@@ -2,6 +2,8 @@ package ru.beleychev.notes.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+import java.util.Set;
+
 
 /**
  * Yeap. My Project)
@@ -10,6 +12,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class RoleDTO implements IsSerializable {
     private Long id;
     private String roleName;
+    private Set<UserDTO> users;
 
     public RoleDTO() {
     }
@@ -18,9 +21,10 @@ public class RoleDTO implements IsSerializable {
         this.id = id;
     }
 
-    public RoleDTO(Long id, String roleName) {
+    public RoleDTO(Long id, String roleName, Set<UserDTO> users) {
         this.id = id;
         this.roleName = roleName;
+        this.users = users;
     }
 
     public Long getId() {
@@ -39,7 +43,15 @@ public class RoleDTO implements IsSerializable {
         this.roleName = roleName;
     }
 
-    @Override
+	public Set<UserDTO> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<UserDTO> users) {
+		this.users = users;
+	}
+
+	@Override
     public String toString() {
         return "Role{" +
                 "id=" + id +

@@ -1,9 +1,12 @@
 package ru.beleychev.notes.server.domain;
 
 import ru.beleychev.notes.shared.dto.RoleDTO;
+import ru.beleychev.notes.shared.dto.UserDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Yeap. My Project)
@@ -19,6 +22,9 @@ public class Role implements Serializable {
 
 	@Column(name = "role_name")
 	private String roleName;
+
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+	private Set<User> users = new HashSet<>();
 
 	public Role() {
 	}
@@ -42,6 +48,14 @@ public class Role implements Serializable {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	@Override
