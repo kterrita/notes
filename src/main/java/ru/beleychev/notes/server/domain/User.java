@@ -45,7 +45,10 @@ public class User implements Serializable {
 	@Email(message = "Please provide a valid email")
 	private String email;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user")
+	private Set<Note> notes = new HashSet<>();
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	private Set<Role> roles = new HashSet<>();
 
