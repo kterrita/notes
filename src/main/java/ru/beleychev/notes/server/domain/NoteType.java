@@ -57,6 +57,14 @@ public class NoteType implements Serializable {
 		this.systemName = systemName;
 	}
 
+	public Set<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(Set<Note> notes) {
+		this.notes = notes;
+	}
+
 	@Override
 	public String toString() {
 		return "NoteType{" +

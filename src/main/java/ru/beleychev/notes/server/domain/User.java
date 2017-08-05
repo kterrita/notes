@@ -128,6 +128,14 @@ public class User implements Serializable {
 		this.roles = roles;
 	}
 
+	public Set<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(Set<Note> notes) {
+		this.notes = notes;
+	}
+
 	@Override
 	public String toString() {
 		return "User{" +

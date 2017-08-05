@@ -25,7 +25,7 @@ public class Note implements Serializable {
 	@Column(name = "note_id")
 	private Long id;
 	@Column(name = "uuid")
-	private UUID uuid;
+	private String uuid;
 	@Column(name = "favorite")
 	private boolean favorite;
 	@Column(name = "date_created")
@@ -44,4 +44,93 @@ public class Note implements Serializable {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	public Note() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public boolean isFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public NoteType getType() {
+		return type;
+	}
+
+	public void setType(NoteType type) {
+		this.type = type;
+	}
+
+	public NoteState getState() {
+		return state;
+	}
+
+	public void setState(NoteState state) {
+		this.state = state;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Note{" +
+				"id=" + id +
+				", uuid=" + uuid +
+				", favorite=" + favorite +
+				", dateCreated=" + dateCreated +
+				", content='" + content + '\'' +
+				", title='" + title + '\'' +
+				", type=" + type +
+				", state=" + state +
+				", user=" + user +
+				'}';
+	}
 }
