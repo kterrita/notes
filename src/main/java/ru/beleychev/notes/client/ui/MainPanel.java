@@ -5,7 +5,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.client.ui.*;
-import ru.beleychev.notes.shared.dto.UserDTO;
+import ru.beleychev.notes.shared.dto.NoteDTO;
 
 /**
  * Main Panel UI building
@@ -48,7 +48,7 @@ public class MainPanel extends Composite {
     @UiField
     Label recycleBin;
     @UiField
-    DataGrid<UserDTO> notesList;
+    DataGrid<NoteDTO> notesList;
 
 
     public MainPanel() {
