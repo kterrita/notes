@@ -6,7 +6,7 @@
             <g:HorizontalPanel ui:field="northPanel">
                 <g:VerticalPanel ui:field="userDatePanel">
                     <g:Label ui:field="usernameLabel"/>
-                    <g:DateLabel ui:field="currentDateLabel"/>
+                    <g:DateLabel ui:field="currentDateLabel" customFormat="EEE, MMM d, 'yyyy"/>
                 </g:VerticalPanel>
                 <g:HorizontalPanel ui:field="searchPanel">
                     <g:TextBox ui:field="searchBox"/>
