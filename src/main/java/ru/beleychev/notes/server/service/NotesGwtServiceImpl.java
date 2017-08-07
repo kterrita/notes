@@ -4,23 +4,12 @@ import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.beleychev.notes.client.NotesGwtService;
-import ru.beleychev.notes.server.domain.Note;
-import ru.beleychev.notes.server.domain.NoteState;
-import ru.beleychev.notes.server.domain.NoteType;
-import ru.beleychev.notes.server.domain.Role;
-import ru.beleychev.notes.server.domain.User;
+import ru.beleychev.notes.server.domain.*;
 import ru.beleychev.notes.server.repository.NoteRepository;
 import ru.beleychev.notes.server.repository.UserRepository;
-import ru.beleychev.notes.shared.AppContextManager;
-import ru.beleychev.notes.shared.dto.NoteDTO;
-import ru.beleychev.notes.shared.dto.NoteStateDTO;
-import ru.beleychev.notes.shared.dto.NoteTypeDTO;
-import ru.beleychev.notes.shared.dto.RoleDTO;
-import ru.beleychev.notes.shared.dto.UserDTO;
+import ru.beleychev.notes.shared.dto.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,18 +22,14 @@ import java.util.Set;
  */
 public class NotesGwtServiceImpl implements NotesGwtService {
 	private static final Logger logger = LoggerFactory.getLogger(NotesGwtServiceImpl.class);
-	private final ApplicationContext applicationContext = AppContextManager.getApplicationContext();
-	private final SecurityContext securityContext = SecurityContextHolder.getContext();
-	@Autowired
 	private UserRepository userRepository;
-	@Autowired
 	private NoteRepository noteRepository;
 
 	@Override
 	public List<UserDTO> listUsers() {
 		List<User> users = userRepository.findAll();
 		List<UserDTO> userDTOs;
-		if (CollectionUtils.isNotEmpty(users)) {
+		if (users != null && users.size() > 0) {
 			userDTOs = new ArrayList<>(users.size());
 			for (User user : users) {
 				userDTOs.add(createUserDTO(user));
@@ -57,7 +42,7 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 
 	@Override
 	public UserDTO getCurrentUser() {
-		String currentUserName = securityContext.getAuthentication().getName();
+		String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		User currentUser = userRepository.findUserByName(currentUserName);
 
 		return createUserDTO(currentUser);
@@ -67,7 +52,7 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 	public List<NoteDTO> getCurrentUserNotes() {
 		List<Note> notes = noteRepository.getNotes(getCurrentUser().getId());
 		List<NoteDTO> noteDTOs;
-		if (CollectionUtils.isNotEmpty(notes)) {
+		if (notes != null && notes.size() > 0) {
 			noteDTOs = new ArrayList<>(notes.size());
 			for (Note note : notes) {
 				noteDTOs.add(createNoteDTO(note));
@@ -112,5 +97,15 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 
 	private NoteStateDTO createNoteStateDTO(NoteState noteState) {
 		return new NoteStateDTO(noteState.getId());
+	}
+
+	@Autowired
+	public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	@Autowired
+	public void setNoteRepository(NoteRepository noteRepository) {
+		this.noteRepository = noteRepository;
 	}
 }

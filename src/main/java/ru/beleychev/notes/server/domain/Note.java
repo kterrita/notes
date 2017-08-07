@@ -36,14 +36,20 @@ public class Note implements Serializable {
 	private String content;
 	@Column(name = "title")
 	private String title;
+	@Column(name = "type_id")
+	private Long typeId;
+	@Column(name = "state_id")
+	private Long stateId;
+	@Column(name = "user_id")
+	private Long userId;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "type_id")
+	@JoinColumn(name = "type_id", insertable = false, updatable = false)
 	private NoteType type;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "state_id")
+	@JoinColumn(name = "state_id", insertable = false, updatable = false)
 	private NoteState state;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
 	private User user;
 
 	public Note() {
@@ -107,6 +113,30 @@ public class Note implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Long getTypeID() {
+		return typeId;
+	}
+
+	public void setTypeID(Long typeID) {
+		this.typeId = typeID;
+	}
+
+	public Long getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public NoteType getType() {
