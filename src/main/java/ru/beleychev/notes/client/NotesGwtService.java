@@ -30,9 +30,9 @@ public interface NotesGwtService extends RemoteService {
 	UserDTO getCurrentUser() throws Exception;
 
 	/**
-	 * Use it to get all notes for given {@link User}
-	 * @param user current use
+	 * Use it to get all notes for given {@link User} Id
+	 * @param id current userId
 	 * @return all {@link NoteDTO} by user, {@code null} if there is no notes in DB
 	 */
-	List<NoteDTO> getNotes(User user) throws Exception;
+	List<NoteDTO> getNotes(Long id) throws Exception;
 }

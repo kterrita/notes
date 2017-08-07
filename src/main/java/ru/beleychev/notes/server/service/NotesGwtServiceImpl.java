@@ -61,15 +61,14 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 	}
 
 	@Override
-	public List<NoteDTO> getNotes(User user) throws Exception {
-		List<Note> notes = noteRepository.getNotes(user.getId());
+	public List<NoteDTO> getNotes(Long id) throws Exception {
+		List<Note> notes = noteRepository.getNotes(id);
 		List<NoteDTO> noteDTOs;
 		if (CollectionUtils.isNotEmpty(notes)) {
 			noteDTOs = new ArrayList<>(notes.size());
 			for (Note note : notes) {
 				noteDTOs.add(createNoteDTO(note));
 			}
-			;
 		} else {
 			return null;
 		}
