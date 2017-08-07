@@ -20,7 +20,7 @@ public class NoteDTO implements IsSerializable {
     private String title;
     private NoteTypeDTO type;
     private NoteStateDTO state;
-    private User user;
+    private UserDTO user;
 
     public NoteDTO() {
     }
@@ -29,7 +29,7 @@ public class NoteDTO implements IsSerializable {
         this.id = id;
     }
 
-    public NoteDTO(Long id, String uuid, boolean favorite, Date dateCreated, String content, String title, NoteTypeDTO type, NoteStateDTO state, User user) {
+    public NoteDTO(Long id, String uuid, boolean favorite, Date dateCreated, String content, String title, NoteTypeDTO type, NoteStateDTO state, UserDTO user) {
         this.id = id;
         this.uuid = uuid;
         this.favorite = favorite;
@@ -105,11 +105,11 @@ public class NoteDTO implements IsSerializable {
         this.state = state;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
