@@ -11,9 +11,9 @@ import java.util.List;
  * @author beleychev.ilya 17.07.2017   16:35
  */
 public interface NotesGwtServiceAsync {
-	void listUsers(AsyncCallback<List<UserDTO>> callback) throws Exception;
+	void listUsers(AsyncCallback<List<UserDTO>> callback);
 
-	void getCurrentUser(AsyncCallback<UserDTO> callback) throws Exception;
+	void getCurrentUser(AsyncCallback<UserDTO> callback);
 
-	void getNotes(Long id, AsyncCallback<NoteDTO> callback) throws Exception;
+	void getCurrentUserNotes(AsyncCallback<List<NoteDTO>> callback);
 }

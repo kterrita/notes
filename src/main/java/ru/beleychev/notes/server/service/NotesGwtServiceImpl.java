@@ -41,7 +41,7 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 	private NoteRepository noteRepository;
 
 	@Override
-	public List<UserDTO> listUsers() throws Exception {
+	public List<UserDTO> listUsers() {
 		List<User> users = userRepository.findAll();
 		List<UserDTO> userDTOs;
 		if (CollectionUtils.isNotEmpty(users)) {
@@ -56,7 +56,7 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 	}
 
 	@Override
-	public UserDTO getCurrentUser() throws Exception {
+	public UserDTO getCurrentUser() {
 		String currentUserName = securityContext.getAuthentication().getName();
 		User currentUser = userRepository.findUserByName(currentUserName);
 
@@ -64,8 +64,8 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 	}
 
 	@Override
-	public List<NoteDTO> getNotes(Long id) throws Exception {
-		List<Note> notes = noteRepository.getNotes(id);
+	public List<NoteDTO> getCurrentUserNotes() {
+		List<Note> notes = noteRepository.getNotes(getCurrentUser().getId());
 		List<NoteDTO> noteDTOs;
 		if (CollectionUtils.isNotEmpty(notes)) {
 			noteDTOs = new ArrayList<>(notes.size());
@@ -78,7 +78,7 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 		return noteDTOs;
 	}
 
-	private UserDTO createUserDTO(User user) throws Exception {
+	private UserDTO createUserDTO(User user) {
 		Set<Role> roles;
 		if (user != null) {
 			roles = user.getRoles();
@@ -92,7 +92,7 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 			}
 		} else {
 			logger.error("No user found in database, username: [{}]", user);
-			throw new Exception("No user found in database");
+			return null;
 		}
 		return new UserDTO(user.getId(), user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getEmail(), roleDTOs);
 	}
@@ -101,7 +101,7 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 		return new RoleDTO(role.getId());
 	}
 
-	private NoteDTO createNoteDTO(Note note) throws Exception {
+	private NoteDTO createNoteDTO(Note note) {
 		return new NoteDTO(note.getId(), note.getUuid(), note.isFavorite(), note.getDateCreated(),
 				note.getContent(), note.getTitle(), createNoteTypeDTO(note.getType()), createNoteStateDTO(note.getState()), createUserDTO(note.getUser()));
 	}

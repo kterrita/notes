@@ -21,18 +21,17 @@ public interface NotesGwtService extends RemoteService {
 	 * Warn: this method returns only Id's of every UserDTO. To get whole object Role, use {@link ru.beleychev.notes.server.repository.RoleRepository}
 	 * @return all users from system, {@code null} if there is no users in DB
 	 */
-	List<UserDTO> listUsers() throws Exception;
+	List<UserDTO> listUsers();
 
 	/**
 	 * Warn: this method returns only Id's of every UserDTO. To get whole object Role, use {@link ru.beleychev.notes.server.repository.RoleRepository}
 	 * @return current authenticated User
 	 */
-	UserDTO getCurrentUser() throws Exception;
+	UserDTO getCurrentUser();
 
 	/**
-	 * Use it to get all notes for given {@link User} Id
-	 * @param id current userId
+	 * Use it to get all notes for CurrentUser
 	 * @return all {@link NoteDTO} by user, {@code null} if there is no notes in DB
 	 */
-	List<NoteDTO> getNotes(Long id) throws Exception;
+	List<NoteDTO> getCurrentUserNotes();
 }
