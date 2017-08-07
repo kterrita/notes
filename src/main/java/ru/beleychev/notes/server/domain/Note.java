@@ -1,5 +1,7 @@
 package ru.beleychev.notes.server.domain;
 
+import ru.beleychev.notes.shared.dto.NoteDTO;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,6 +47,18 @@ public class Note implements Serializable {
 	private User user;
 
 	public Note() {
+	}
+
+	public Note(NoteDTO noteDTO) {
+		this.id = noteDTO.getId();
+		this.uuid = noteDTO.getUuid();
+		this.favorite = noteDTO.isFavorite();
+		this.dateCreated = noteDTO.getDateCreated();
+		this.content = noteDTO.getContent();
+		this.title = noteDTO.getTitle();
+		this.type = new NoteType(noteDTO.getType());
+		this.state = new NoteState(noteDTO.getState());
+		this.user = new User(noteDTO.getUser());
 	}
 
 	public Long getId() {

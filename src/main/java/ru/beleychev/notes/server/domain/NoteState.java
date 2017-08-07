@@ -1,5 +1,8 @@
 package ru.beleychev.notes.server.domain;
 
+import ru.beleychev.notes.shared.dto.NoteDTO;
+import ru.beleychev.notes.shared.dto.NoteStateDTO;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +34,18 @@ public class NoteState implements Serializable {
 	private Set<Note> notes = new HashSet<>();
 
 	public NoteState() {
+	}
+
+	public NoteState(NoteStateDTO noteStateDTO) {
+		this.id = noteStateDTO.getId();
+		this.description = noteStateDTO.getDescription();
+		this.systemName = noteStateDTO.getSystemName();
+		Set<NoteDTO> noteDTOs = noteStateDTO.getNotes();
+		Set<Note> notes = new HashSet<>();
+		for (NoteDTO noteDTO : noteDTOs) {
+			notes.add(new Note(noteDTO));
+		}
+		this.notes = notes;
 	}
 
 	public Long getId() {

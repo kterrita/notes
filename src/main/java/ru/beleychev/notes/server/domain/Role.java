@@ -29,7 +29,7 @@ public class Role implements Serializable {
 	@Column(name = "role_name")
 	private String roleName;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
 	private Set<User> users = new HashSet<>();
 
 	public Role() {
