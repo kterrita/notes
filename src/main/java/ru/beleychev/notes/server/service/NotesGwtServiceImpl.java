@@ -3,6 +3,7 @@ package ru.beleychev.notes.server.service;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,9 +34,11 @@ import java.util.Set;
 public class NotesGwtServiceImpl implements NotesGwtService {
 	private static final Logger logger = LoggerFactory.getLogger(NotesGwtServiceImpl.class);
 	private final ApplicationContext applicationContext = AppContextManager.getApplicationContext();
-	private final UserRepository userRepository = applicationContext.getBean(UserRepository.class);
-	private final NoteRepository noteRepository = applicationContext.getBean(NoteRepository.class);
 	private final SecurityContext securityContext = SecurityContextHolder.getContext();
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private NoteRepository noteRepository;
 
 	@Override
 	public List<UserDTO> listUsers() throws Exception {
