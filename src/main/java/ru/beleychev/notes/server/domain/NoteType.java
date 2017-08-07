@@ -68,8 +68,6 @@ public class NoteType implements Serializable {
 	@Override
 	public String toString() {
 		return "NoteType{" +
-		       "id=" + id +
-		       ", description='" + description + '\'' +
 		       ", systemName='" + systemName + '\'' +
 		       '}';
 	}

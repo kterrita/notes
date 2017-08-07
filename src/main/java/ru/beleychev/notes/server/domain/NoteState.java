@@ -68,8 +68,6 @@ public class NoteState implements Serializable {
 	@Override
 	public String toString() {
 		return "NoteState{" +
-		       "id=" + id +
-		       ", description='" + description + '\'' +
 		       ", systemName='" + systemName + '\'' +
 		       '}';
 	}

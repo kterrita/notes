@@ -115,15 +115,7 @@ public class Note implements Serializable {
 	@Override
 	public String toString() {
 		return "Note{" +
-				"id=" + id +
 				", uuid=" + uuid +
-				", favorite=" + favorite +
-				", dateCreated=" + dateCreated +
-				", content='" + content + '\'' +
-				", title='" + title + '\'' +
-				", type=" + type +
-				", state=" + state +
-				", user=" + user +
 				'}';
 	}
 }
