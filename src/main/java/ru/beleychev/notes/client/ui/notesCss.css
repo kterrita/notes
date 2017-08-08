@@ -1,12 +1,29 @@
-.northPanel {
+.mainPanel {
   margin: 5px;
+  background: #99ff7e;
+}
+.northPanel {
+  margin: 10px;
+  background: #ffef44;
 }
 .southPanel {
-  margin: 5px;
+  margin: 10px;
+  background: #ff8a4c;
 }
 .navigationPanel {
-  margin: 5px;
+  margin: 10px;
+  background: #6bfff2;
 }
 .dataGridPanel {
+  margin: 10px;
+  background: #ff7b99;
+}
+.label {
+  margin: 5px;
+}
+.button {
+  margin: 5px;
+}
+.searchBox {
   margin: 5px;
 }

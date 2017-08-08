@@ -2,30 +2,33 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:c="urn:import:com.google.gwt.user.cellview.client">
     <ui:style field="notesCss" src="notesCss.css"/>
-    <g:DockLayoutPanel ui:field="mainPanel" unit="EM">
+    <g:DockLayoutPanel ui:field="mainPanel" unit="EM" addStyleNames="{notesCss.mainPanel}">
         <g:north size="5">
             <g:HorizontalPanel ui:field="northPanel" addStyleNames="{notesCss.northPanel}">
                 <g:VerticalPanel ui:field="userDatePanel">
-                    <g:Label ui:field="usernameLabel"/>
-                    <g:DateLabel ui:field="currentDateLabel" customFormat="EEE, MMM d, yyyy"/>
+                    <g:Label ui:field="usernameLabel" addStyleNames="{notesCss.label}"/>
+                    <g:DateLabel ui:field="currentDateLabel" customFormat="EEE, MMM d, yyyy"
+                                 addStyleNames="{notesCss.label}"/>
                 </g:VerticalPanel>
                 <g:HorizontalPanel ui:field="searchPanel">
-                    <g:TextBox ui:field="searchBox"/>
-                    <g:Button ui:field="searchButton"/>
+                    <g:TextBox ui:field="searchBox" addStyleNames="{notesCss.searchBox}"/>
+                    <g:Button ui:field="searchButton" addStyleNames="{notesCss.button}"/>
                 </g:HorizontalPanel>
             </g:HorizontalPanel>
         </g:north>
         <g:south size="5">
-            <g:HorizontalPanel ui:field="southPanel" addStyleNames="{notesCss.southPanel}">
-                <g:Label ui:field="rightsReservedLabel"/>
+            <g:HorizontalPanel ui:field="southPanel" addStyleNames="{notesCss.southPanel}" width="100%">
+                <g:cell horizontalAlignment="ALIGN_CENTER">
+                    <g:Label ui:field="rightsReservedLabel" addStyleNames="{notesCss.label}"/>
+                </g:cell>
             </g:HorizontalPanel>
         </g:south>
         <g:west size="10">
             <g:VerticalPanel ui:field="navigationPanel" addStyleNames="{notesCss.navigationPanel}">
-                <g:Label ui:field="allNotes" text="All notes"/>
-                <g:Label ui:field="important" text="Important"/>
-                <g:Label ui:field="favorite" text="Favorite"/>
-                <g:Label ui:field="recycleBin" text="Recycle bin"/>
+                <g:Label ui:field="allNotes" text="All notes" addStyleNames="{notesCss.label}"/>
+                <g:Label ui:field="important" text="Important" addStyleNames="{notesCss.label}"/>
+                <g:Label ui:field="favorite" text="Favorite" addStyleNames="{notesCss.label}"/>
+                <g:Label ui:field="recycleBin" text="Recycle bin" addStyleNames="{notesCss.label}"/>
             </g:VerticalPanel>
         </g:west>
         <g:center>
