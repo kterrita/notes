@@ -24,87 +24,89 @@ import java.util.Date;
  * Created by ilya on 30.07.2017.
  */
 public class MainPanel extends Composite {
-    interface MainPanelUiBinder extends UiBinder<DockLayoutPanel, MainPanel> {
-    }
+	interface MainPanelUiBinder extends UiBinder<DockLayoutPanel, MainPanel> {
+	}
 
-    private static MainPanelUiBinder ourUiBinder = GWT.create(MainPanelUiBinder.class);
+	private static MainPanelUiBinder ourUiBinder = GWT.create(MainPanelUiBinder.class);
 
-    @UiField
-    DockLayoutPanel mainPanel;
-    @UiField
-    HorizontalPanel northPanel;
-    @UiField
-    VerticalPanel userDatePanel;
-    @UiField
-    Label usernameLabel;
-    @UiField
-    DateLabel currentDateLabel;
-    @UiField
-    HorizontalPanel searchPanel;
-    @UiField
-    TextBox searchBox;
-    @UiField
-    Button searchButton;
-    @UiField
-    HorizontalPanel southPanel;
-    @UiField
-    Label rightsReservedLabel;
-    @UiField
-    VerticalPanel navigationPanel;
-    @UiField
-    Label allNotes;
-    @UiField
-    Label important;
-    @UiField
-    Label favorite;
-    @UiField
-    Label recycleBin;
-    @UiField
-    DataGrid<NoteDTO> notesList;
+	@UiField
+	DockLayoutPanel mainPanel;
+	@UiField
+	HorizontalPanel northPanel;
+	@UiField
+	VerticalPanel userDatePanel;
+	@UiField
+	Label usernameLabel;
+	@UiField
+	DateLabel currentDateLabel;
+	@UiField
+	HorizontalPanel searchPanel;
+	@UiField
+	TextBox searchBox;
+	@UiField
+	Button searchButton;
+	@UiField
+	HorizontalPanel southPanel;
+	@UiField
+	Label rightsReservedLabel;
+	@UiField
+	VerticalPanel navigationPanel;
+	@UiField
+	Label newNote;
+	@UiField
+	Label allNotes;
+	@UiField
+	Label important;
+	@UiField
+	Label favorite;
+	@UiField
+	Label recycleBin;
+	@UiField
+	DataGrid<NoteDTO> notesList;
 
 
-    public MainPanel() {
-        initWidget(ourUiBinder.createAndBindUi(this));
-        setupNorthPanel();
-        setupSouthPanel();
-        setupNavigationPanel();
-        setupCenterPanel();
-    }
+	public MainPanel() {
+		initWidget(ourUiBinder.createAndBindUi(this));
+		setupNorthPanel();
+		setupSouthPanel();
+		setupNavigationPanel();
+		setupCenterPanel();
+	}
 
-    private void setupNorthPanel() {
-    	currentDateLabel.setValue(new Date());
-    	searchButton.setText("Search");
-    }
+	private void setupNorthPanel() {
+		currentDateLabel.setValue(new Date());
+		searchButton.setText("Search");
+	}
 
-    private void setupSouthPanel() {
-    	rightsReservedLabel.setText("All rights reserved. BIN TM. 2017");
-    }
+	private void setupSouthPanel() {
+		rightsReservedLabel.setText("All rights reserved. BIN TM. 2017");
+	}
 
-    private void setupNavigationPanel() {
-    	allNotes.setText("All notes");
-	    important.setText("Important");
-	    favorite.setText("Favorite");
-	    recycleBin.setText("Recycle Bin");
-    }
+	private void setupNavigationPanel() {
+		allNotes.setText("All notes");
+		important.setText("Important");
+		favorite.setText("Favorite");
+		recycleBin.setText("Recycle Bin");
+	}
 
-    private void setupCenterPanel() {
-	    Column<NoteDTO, String> titleColumn = new Column<NoteDTO, String>(new TextCell()) {
-		    @Override
-		    public String getValue(NoteDTO noteDTO) {
-			    return noteDTO.getTitle();
-		    }
-	    };
+	private void setupCenterPanel() {
+		Column<NoteDTO, String> titleColumn = new Column<NoteDTO, String>(new TextCell()) {
+			@Override
+			public String getValue(NoteDTO noteDTO) {
+				return noteDTO.getTitle();
+			}
+		};
 
-	    Column<NoteDTO, Date> dateCreatedColumn = new Column<NoteDTO, Date>(new DateCell()) {
-		    @Override
-		    public Date getValue(NoteDTO noteDTO) {
-			    return noteDTO.getDateCreated();
-		    }
-	    };
+		Column<NoteDTO, Date> dateCreatedColumn = new Column<NoteDTO, Date>(new DateCell()) {
+			@Override
+			public Date getValue(NoteDTO noteDTO) {
+				return noteDTO.getDateCreated();
+			}
+		};
 
-	    notesList.addColumn(titleColumn, "Title");
-	    notesList.addColumn(dateCreatedColumn, "Created Date");
-    }
+		notesList.addColumn(titleColumn, "Title");
+		notesList.addColumn(dateCreatedColumn, "Created Date");
+	}
 
 	public static MainPanelUiBinder getOurUiBinder() {
 		return ourUiBinder;
@@ -152,6 +154,10 @@ public class MainPanel extends Composite {
 
 	public VerticalPanel getNavigationPanel() {
 		return navigationPanel;
+	}
+
+	public Label getNewNote() {
+		return newNote;
 	}
 
 	public Label getAllNotes() {

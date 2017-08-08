@@ -25,6 +25,7 @@
         </g:south>
         <g:west size="10">
             <g:VerticalPanel ui:field="navigationPanel" addStyleNames="{notesCss.navigationPanel}">
+                <g:Label ui:field="newNote" text="New note" addStyleNames="{notesCss.label}"/>
                 <g:Label ui:field="allNotes" text="All notes" addStyleNames="{notesCss.label}"/>
                 <g:Label ui:field="important" text="Important" addStyleNames="{notesCss.label}"/>
                 <g:Label ui:field="favorite" text="Favorite" addStyleNames="{notesCss.label}"/>
