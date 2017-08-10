@@ -15,9 +15,13 @@ public class NoteDTO implements IsSerializable {
     private Long id;
     private String uuid;
     private boolean favorite;
+    private boolean important;
     private Date dateCreated;
     private String content;
     private String title;
+    private Long typeId;
+    private Long stateId;
+    private Long userId;
     private NoteTypeDTO type;
     private NoteStateDTO state;
     private UserDTO user;
@@ -29,13 +33,17 @@ public class NoteDTO implements IsSerializable {
         this.id = id;
     }
 
-    public NoteDTO(Long id, String uuid, boolean favorite, Date dateCreated, String content, String title, NoteTypeDTO type, NoteStateDTO state, UserDTO user) {
+    public NoteDTO(Long id, String uuid, boolean favorite, Date dateCreated, String content, String title,
+                   Long typeId, Long stateId, Long userId, NoteTypeDTO type, NoteStateDTO state, UserDTO user) {
         this.id = id;
         this.uuid = uuid;
         this.favorite = favorite;
         this.dateCreated = dateCreated;
         this.content = content;
         this.title = title;
+        this.typeId = typeId;
+        this.stateId = stateId;
+        this.userId = userId;
         this.type = type;
         this.state = state;
         this.user = user;
@@ -65,6 +73,14 @@ public class NoteDTO implements IsSerializable {
         this.favorite = favorite;
     }
 
+    public boolean isImportant() {
+        return important;
+    }
+
+    public void setImportant(boolean important) {
+        this.important = important;
+    }
+
     public Date getDateCreated() {
         return dateCreated;
     }
@@ -87,6 +103,30 @@ public class NoteDTO implements IsSerializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
+
+    public Long getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public NoteTypeDTO getType() {

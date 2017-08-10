@@ -30,6 +30,8 @@ public class Note implements Serializable {
 	private String uuid;
 	@Column(name = "favorite")
 	private boolean favorite;
+	@Column(name = "important")
+	private boolean important;
 	@Column(name = "date_created")
 	private Date dateCreated;
 	@Column(name = "content")
@@ -62,6 +64,9 @@ public class Note implements Serializable {
 		this.dateCreated = noteDTO.getDateCreated();
 		this.content = noteDTO.getContent();
 		this.title = noteDTO.getTitle();
+		this.typeId = noteDTO.getTypeId();
+		this.stateId = noteDTO.getStateId();
+		this.userId = noteDTO.getUserId();
 		this.type = new NoteType(noteDTO.getType());
 		this.state = new NoteState(noteDTO.getState());
 		this.user = new User(noteDTO.getUser());
@@ -89,6 +94,14 @@ public class Note implements Serializable {
 
 	public void setFavorite(boolean favorite) {
 		this.favorite = favorite;
+	}
+
+	public boolean isImportant() {
+		return important;
+	}
+
+	public void setImportant(boolean important) {
+		this.important = important;
 	}
 
 	public Date getDateCreated() {
