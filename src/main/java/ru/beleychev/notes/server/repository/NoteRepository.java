@@ -19,4 +19,6 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 	@Query("select n from Note n where n.userId = ?1")
 	@Transactional
 	List<Note> getNotes(Long id);
+
+	//TODO использовать предыдущий запрос постоянно при вызове новых
 }
