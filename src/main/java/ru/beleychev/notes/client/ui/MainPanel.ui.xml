@@ -1,39 +1,39 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:c="urn:import:com.google.gwt.user.cellview.client">
-    <ui:style field="notesCss" src="notesCss.css"/>
-    <g:DockLayoutPanel ui:field="mainPanel" unit="EM" addStyleNames="{notesCss.mainPanel}">
+    <ui:with field="res" type="ru.beleychev.notes.client.ui.Resources"/>
+    <g:DockLayoutPanel ui:field="mainPanel" unit="EM" addStyleNames="{res.style.mainPanel}">
         <g:north size="5">
-            <g:HorizontalPanel ui:field="northPanel" addStyleNames="{notesCss.northPanel}">
+            <g:HorizontalPanel ui:field="northPanel" addStyleNames="{res.style.northPanel}">
                 <g:VerticalPanel ui:field="userDatePanel">
-                    <g:Label ui:field="usernameLabel" addStyleNames="{notesCss.label}"/>
+                    <g:Label ui:field="usernameLabel" addStyleNames="{res.style.label}"/>
                     <g:DateLabel ui:field="currentDateLabel" customFormat="EEE, MMM d, yyyy"
-                                 addStyleNames="{notesCss.label}"/>
+                                 addStyleNames="{res.style.label}"/>
                 </g:VerticalPanel>
                 <g:HorizontalPanel ui:field="searchPanel">
-                    <g:TextBox ui:field="searchBox" addStyleNames="{notesCss.searchBox}"/>
-                    <g:Button ui:field="searchButton" addStyleNames="{notesCss.button}"/>
+                    <g:TextBox ui:field="searchBox" addStyleNames="{res.style.searchBox}"/>
+                    <g:Button ui:field="searchButton" addStyleNames="{res.style.button}"/>
                 </g:HorizontalPanel>
             </g:HorizontalPanel>
         </g:north>
         <g:south size="5">
-            <g:HorizontalPanel ui:field="southPanel" addStyleNames="{notesCss.southPanel}" width="100%">
+            <g:HorizontalPanel ui:field="southPanel" addStyleNames="{res.style.southPanel}" width="100%">
                 <g:cell horizontalAlignment="ALIGN_CENTER">
-                    <g:Label ui:field="rightsReservedLabel" addStyleNames="{notesCss.label}"/>
+                    <g:Label ui:field="rightsReservedLabel" addStyleNames="{res.style.label}"/>
                 </g:cell>
             </g:HorizontalPanel>
         </g:south>
         <g:west size="10">
-            <g:VerticalPanel ui:field="navigationPanel" addStyleNames="{notesCss.navigationPanel}">
-                <g:Label ui:field="newNote" text="New note" addStyleNames="{notesCss.label}"/>
-                <g:Label ui:field="allNotes" text="All notes" addStyleNames="{notesCss.label}"/>
-                <g:Label ui:field="important" text="Important" addStyleNames="{notesCss.label}"/>
-                <g:Label ui:field="favorite" text="Favorite" addStyleNames="{notesCss.label}"/>
-                <g:Label ui:field="recycleBin" text="Recycle bin" addStyleNames="{notesCss.label}"/>
+            <g:VerticalPanel ui:field="navigationPanel" addStyleNames="{res.style.navigationPanel}">
+                <g:Label ui:field="newNote" text="New note" addStyleNames="{res.style.label}"/>
+                <g:Label ui:field="allNotes" text="All notes" addStyleNames="{res.style.label}"/>
+                <g:Label ui:field="important" text="Important" addStyleNames="{res.style.label}"/>
+                <g:Label ui:field="favorite" text="Favorite" addStyleNames="{res.style.label}"/>
+                <g:Label ui:field="recycleBin" text="Recycle bin" addStyleNames="{res.style.label}"/>
             </g:VerticalPanel>
         </g:west>
         <g:center>
-            <c:DataGrid ui:field="notesList" width="100%" height="100%" addStyleNames="{notesCss.dataGridPanel}"/>
+            <c:DataGrid ui:field="notesList" width="100%" height="100%" addStyleNames="{res.style.dataGridPanel}"/>
         </g:center>
     </g:DockLayoutPanel>
 </ui:UiBinder>

@@ -63,7 +63,12 @@ public class MainPanel extends Composite {
 	Label recycleBin;
 	@UiField
 	DataGrid<NoteDTO> notesList;
+	@UiField
+	Resources res;
 
+	static {
+		Resources.INSTANCE.style().ensureInjected();
+	}
 
 	public MainPanel() {
 		initWidget(ourUiBinder.createAndBindUi(this));
