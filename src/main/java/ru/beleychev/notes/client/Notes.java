@@ -22,38 +22,6 @@ public class Notes implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		MainPanel mainPanel = new MainPanel();
 
-		if (notesGwtServiceAsync == null) {
-			notesGwtServiceAsync = GWT.create(NotesGwtService.class);
-		}
-
-		notesGwtServiceAsync.getCurrentUser(new AsyncCallback<UserDTO>() {
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Something is wrong with *fillUserData method*");
-			}
-
-			@Override
-			public void onSuccess(UserDTO result) {
-				mainPanel.getUsernameLabel().setText(result.getUsername());
-			}
-		});
-
-
-		notesGwtServiceAsync.getCurrentUserNotes(new AsyncCallback<List<NoteDTO>>() {
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Something is wrong with *FillInDataGrid method*");
-			}
-
-			@Override
-			public void onSuccess(List<NoteDTO> result) {
-				mainPanel.getNotesList().setRowCount(result.size(), true);
-				mainPanel.getNotesList().setRowData(0, result);
-			}
-		});
-
-		RootLayoutPanel.get().add(mainPanel);
 	}
 }
