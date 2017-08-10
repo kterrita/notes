@@ -33,11 +33,12 @@ public class NoteDTO implements IsSerializable {
         this.id = id;
     }
 
-    public NoteDTO(Long id, String uuid, boolean favorite, Date dateCreated, String content, String title,
+    public NoteDTO(Long id, String uuid, boolean favorite, boolean important, Date dateCreated, String content, String title,
                    Long typeId, Long stateId, Long userId, NoteTypeDTO type, NoteStateDTO state, UserDTO user) {
         this.id = id;
         this.uuid = uuid;
         this.favorite = favorite;
+        this.important = important;
         this.dateCreated = dateCreated;
         this.content = content;
         this.title = title;
