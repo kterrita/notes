@@ -58,22 +58,22 @@ public class NotesPresenter implements Presenter, NotesView.Presenter {
 
 	@Override
 	public void onAllNotesButtonClicked() {
-
+		fillNotesDataGrid();
 	}
 
 	@Override
 	public void onImportantButtonClicked() {
-
+		fillImportantNotes();
 	}
 
 	@Override
 	public void onFavoriteButtonClicked() {
-
+		fillFavoriteNotes();
 	}
 
 	@Override
 	public void onRecycleBinButtonClicked() {
-
+		fillDeletedNotes();
 	}
 
 	@Override
@@ -94,6 +94,57 @@ public class NotesPresenter implements Presenter, NotesView.Presenter {
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Error was caught while application were filling note grid");
+			}
+
+			@Override
+			public void onSuccess(List<NoteDTO> result) {
+				noteDTOs = result;
+				view.setRowData(noteDTOs);
+			}
+		});
+	}
+	/**
+	 *  filling favorite notes to dataGrid
+	 */
+	private void fillFavoriteNotes() {
+		rpcService.getFavoriteNotes(new AsyncCallback<List<NoteDTO>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error was caught while application were filling favorite notes");
+			}
+
+			@Override
+			public void onSuccess(List<NoteDTO> result) {
+				noteDTOs = result;
+				view.setRowData(noteDTOs);
+			}
+		});
+	}
+	/**
+	 *  filling important notes to dataGrid
+	 */
+	private void fillImportantNotes() {
+		rpcService.getImportantNotes(new AsyncCallback<List<NoteDTO>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error was caught while application were filling favorite notes");
+			}
+
+			@Override
+			public void onSuccess(List<NoteDTO> result) {
+				noteDTOs = result;
+				view.setRowData(noteDTOs);
+			}
+		});
+	}
+	/**
+	 *  filling deleted notes to dataGrid
+	 */
+	private void fillDeletedNotes() {
+		rpcService.getDeletedNotes(new AsyncCallback<List<NoteDTO>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error was caught while application were filling favorite notes");
 			}
 
 			@Override

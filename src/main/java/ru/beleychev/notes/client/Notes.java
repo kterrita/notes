@@ -2,6 +2,7 @@ package ru.beleychev.notes.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -18,10 +19,11 @@ import java.util.List;
  * @since 17.07.2017
  */
 public class Notes implements EntryPoint {
-	private NotesGwtServiceAsync notesGwtServiceAsync = GWT.create(NotesGwtService.class);
-
 	@Override
 	public void onModuleLoad() {
-
+		NotesGwtServiceAsync rpcService = GWT.create(NotesGwtService.class);
+		HandlerManager eventBus = new HandlerManager(null);
+		ClientSideController controller = new ClientSideController(eventBus, rpcService);
+		controller.go(RootLayoutPanel.get());
 	}
 }

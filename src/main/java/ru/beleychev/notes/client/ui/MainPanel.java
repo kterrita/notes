@@ -130,7 +130,7 @@ public class MainPanel extends Composite implements NotesView {
 		}
 	}
 
-	@UiHandler("notesList")
+/*	@UiHandler("notesList")
 	void onRowItemClicked(ClickEvent event) {
 		if (presenter != null) {
 			// TODO: простая заглушка. Необходимо реализовать выделение строки чекбоксом
@@ -144,7 +144,7 @@ public class MainPanel extends Composite implements NotesView {
 			// TODO: простая заглушка. Необходимо реализовать логику Обработки выбранных строк
 			presenter.onRowItemSelected(notesList.getVisibleItem(0));
 		}
-	}
+	}*/
 
 	@Override
 	public void setPresenter(Presenter presenter) {
