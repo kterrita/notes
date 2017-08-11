@@ -45,6 +45,8 @@ public class Note implements Serializable {
     private Long stateId;
     @Column(name = "user_id")
     private Long userId;
+    @Column(name ="deleted")
+    private boolean deleted;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id", insertable = false, updatable = false)
     private NoteType type;
@@ -69,6 +71,7 @@ public class Note implements Serializable {
         this.typeId = noteDTO.getTypeId();
         this.stateId = noteDTO.getStateId();
         this.userId = noteDTO.getUserId();
+        this.deleted = noteDTO.isDeleted();
         this.type = new NoteType(noteDTO.getType());
         this.state = new NoteState(noteDTO.getState());
         this.user = new User(noteDTO.getUser());
@@ -130,13 +133,13 @@ public class Note implements Serializable {
         this.title = title;
     }
 
-    public Long getTypeID() {
-        return typeId;
-    }
+	public Long getTypeId() {
+		return typeId;
+	}
 
-    public void setTypeID(Long typeID) {
-        this.typeId = typeID;
-    }
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
+	}
 
     public Long getStateId() {
         return stateId;
@@ -154,7 +157,15 @@ public class Note implements Serializable {
         this.userId = userId;
     }
 
-    public NoteType getType() {
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public NoteType getType() {
         return type;
     }
 

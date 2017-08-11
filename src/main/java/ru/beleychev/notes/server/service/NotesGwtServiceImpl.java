@@ -89,7 +89,7 @@ public class NotesGwtServiceImpl implements NotesGwtService {
 
     private NoteDTO createNoteDTO(Note note) {
         return new NoteDTO(note.getId(), note.getUuid(), note.isFavorite(), note.isImportant(), note.getDateCreated(),
-                note.getContent(), note.getTitle(), note.getTypeID(), note.getStateId(), note.getUserId(),
+                note.getContent(), note.getTitle(), note.getTypeId(), note.getStateId(), note.getUserId(), note.isDeleted(),
                 createNoteTypeDTO(note.getType()), createNoteStateDTO(note.getState()), createUserDTO(note.getUser()));
     }
 
