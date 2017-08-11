@@ -16,4 +16,10 @@ public interface NotesGwtServiceAsync {
 	void getCurrentUser(AsyncCallback<UserDTO> callback);
 
 	void getCurrentUserNotes(AsyncCallback<List<NoteDTO>> callback);
+
+	void getFavoriteNotes(AsyncCallback<List<NoteDTO>> callback);
+
+	void getImportantNotes(AsyncCallback<List<NoteDTO>> callback);
+
+	void getDeletedNotes(AsyncCallback<List<NoteDTO>> callback);
 }
