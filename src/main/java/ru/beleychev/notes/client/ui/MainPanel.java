@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
 import ru.beleychev.notes.client.view.NotesView;
 import ru.beleychev.notes.shared.dto.NoteDTO;
 
@@ -70,6 +71,7 @@ public class MainPanel extends Composite implements NotesView {
 	DataGrid<NoteDTO> notesList;
 	@UiField
 	Resources res;
+	ListDataProvider<NoteDTO> dataProvider = new ListDataProvider<>();
 
 	private Presenter presenter;
 
@@ -79,6 +81,38 @@ public class MainPanel extends Composite implements NotesView {
 
 	public MainPanel() {
 		initWidget(ourUiBinder.createAndBindUi(this));
+		setupNorthPanel();
+		setupSouthPanel();
+		setupCenterPanel();
+	}
+
+	private void setupNorthPanel() {
+		currentDateLabel.setValue(new Date());
+		searchButton.setText("Search");
+	}
+
+	private void setupSouthPanel() {
+		rightsReservedLabel.setText("All rights reserved. BIN TM. 2017");
+	}
+
+	private void setupCenterPanel() {
+		Column<NoteDTO, String> titleColumn = new Column<NoteDTO, String>(new TextCell()) {
+			@Override
+			public String getValue(NoteDTO noteDTO) {
+				return noteDTO.getTitle();
+			}
+		};
+
+		Column<NoteDTO, Date> dateCreatedColumn = new Column<NoteDTO, Date>(new DateCell()) {
+			@Override
+			public Date getValue(NoteDTO noteDTO) {
+				return noteDTO.getDateCreated();
+			}
+		};
+
+		notesList.addColumn(titleColumn, "Title");
+		notesList.addColumn(dateCreatedColumn, "Created Date");
+		dataProvider.addDataDisplay(notesList);
 	}
 
 	@UiHandler("searchButton")
@@ -153,7 +187,11 @@ public class MainPanel extends Composite implements NotesView {
 
 	@Override
 	public void setRowData(List<NoteDTO> rowData) {
-		notesList.setRowData(0, rowData);
+		dataProvider.getList().clear();
+		dataProvider.getList().addAll(rowData);
+		dataProvider.flush();
+		dataProvider.refresh();
+		notesList.redraw();
 	}
 
 	@Override
