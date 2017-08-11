@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import ru.beleychev.notes.client.NotesGwtServiceAsync;
 import ru.beleychev.notes.client.common.SelectionModel;
+import ru.beleychev.notes.client.event.NewNoteEvent;
 import ru.beleychev.notes.client.view.NotesView;
 import ru.beleychev.notes.shared.dto.NoteDTO;
 import ru.beleychev.notes.shared.dto.UserDTO;
@@ -57,7 +58,8 @@ public class NotesPresenter implements Presenter, NotesView.Presenter {
 
     @Override
     public void onNewNoteButtonClicked() {
-
+        // TODO: созадть вьюху для новой записи
+        eventBus.fireEvent(new NewNoteEvent());
     }
 
     @Override
