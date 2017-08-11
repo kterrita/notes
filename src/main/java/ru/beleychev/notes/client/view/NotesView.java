@@ -2,6 +2,7 @@ package ru.beleychev.notes.client.view;
 
 import com.google.gwt.user.client.ui.Widget;
 import ru.beleychev.notes.shared.dto.NoteDTO;
+import ru.beleychev.notes.shared.dto.UserDTO;
 
 import java.util.List;
 
@@ -33,5 +34,6 @@ public interface NotesView {
 
 	void setPresenter(Presenter presenter);
 	void setRowData(List<NoteDTO> rowData);
+	void setUserDetails(UserDTO userDTO);
 	Widget asWidget();
 }

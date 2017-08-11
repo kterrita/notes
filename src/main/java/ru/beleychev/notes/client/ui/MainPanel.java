@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import ru.beleychev.notes.client.view.NotesView;
 import ru.beleychev.notes.shared.dto.NoteDTO;
+import ru.beleychev.notes.shared.dto.UserDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -30,142 +31,147 @@ import java.util.List;
  * Created by ilya on 30.07.2017.
  */
 public class MainPanel extends Composite implements NotesView {
-	interface MainPanelUiBinder extends UiBinder<DockLayoutPanel, MainPanel> {
-	}
+    interface MainPanelUiBinder extends UiBinder<DockLayoutPanel, MainPanel> {
+    }
 
-	private static MainPanelUiBinder ourUiBinder = GWT.create(MainPanelUiBinder.class);
+    private static MainPanelUiBinder ourUiBinder = GWT.create(MainPanelUiBinder.class);
 
-	@UiField
-	DockLayoutPanel mainPanel;
-	@UiField
-	HorizontalPanel northPanel;
-	@UiField
-	VerticalPanel userDatePanel;
-	@UiField
-	Label usernameLabel;
-	@UiField
-	DateLabel currentDateLabel;
-	@UiField
-	HorizontalPanel searchPanel;
-	@UiField
-	TextBox searchBox;
-	@UiField
-	Button searchButton;
-	@UiField
-	HorizontalPanel southPanel;
-	@UiField
-	Label rightsReservedLabel;
-	@UiField
-	VerticalPanel navigationPanel;
-	@UiField
-	Label newNote;
-	@UiField
-	Label allNotes;
-	@UiField
-	Label important;
-	@UiField
-	Label favorite;
-	@UiField
-	Label recycleBin;
-	@UiField
-	DataGrid<NoteDTO> notesList;
-	@UiField
-	Resources res;
-	ListDataProvider<NoteDTO> dataProvider = new ListDataProvider<>();
+    @UiField
+    DockLayoutPanel mainPanel;
+    @UiField
+    HorizontalPanel northPanel;
+    @UiField
+    VerticalPanel userDatePanel;
+    @UiField
+    Label usernameLabel;
+    @UiField
+    DateLabel currentDateLabel;
+    @UiField
+    HorizontalPanel searchPanel;
+    @UiField
+    TextBox searchBox;
+    @UiField
+    Button searchButton;
+    @UiField
+    HorizontalPanel southPanel;
+    @UiField
+    Label rightsReservedLabel;
+    @UiField
+    VerticalPanel navigationPanel;
+    @UiField
+    Label newNote;
+    @UiField
+    Label allNotes;
+    @UiField
+    Label important;
+    @UiField
+    Label favorite;
+    @UiField
+    Label recycleBin;
+    @UiField
+    DataGrid<NoteDTO> notesList;
+    @UiField
+    Resources res;
+    private ListDataProvider<NoteDTO> dataProvider = new ListDataProvider<>();
 
-	private Presenter presenter;
+    private Presenter presenter;
 
-	static {
-		Resources.INSTANCE.style().ensureInjected();
-	}
+    static {
+        Resources.INSTANCE.style().ensureInjected();
+    }
 
-	public MainPanel() {
-		initWidget(ourUiBinder.createAndBindUi(this));
-		setupNorthPanel();
-		setupSouthPanel();
-		setupCenterPanel();
-	}
+    public MainPanel() {
+        initWidget(ourUiBinder.createAndBindUi(this));
+        setupNorthPanel();
+        setupSouthPanel();
+        setupCenterPanel();
+    }
 
-	private void setupNorthPanel() {
-		currentDateLabel.setValue(new Date());
-		searchButton.setText("Search");
-	}
+    private void setupNorthPanel() {
+        currentDateLabel.setValue(new Date());
+        searchButton.setText("Search");
+    }
 
-	private void setupSouthPanel() {
-		rightsReservedLabel.setText("All rights reserved. BIN TM. 2017");
-	}
+    private void setupSouthPanel() {
+        rightsReservedLabel.setText("All rights reserved. BIN TM. 2017");
+    }
 
-	private void setupCenterPanel() {
-		Column<NoteDTO, String> titleColumn = new Column<NoteDTO, String>(new TextCell()) {
-			@Override
-			public String getValue(NoteDTO noteDTO) {
-				return noteDTO.getTitle();
-			}
-		};
+    private void setupCenterPanel() {
+        Column<NoteDTO, String> titleColumn = new Column<NoteDTO, String>(new TextCell()) {
+            @Override
+            public String getValue(NoteDTO noteDTO) {
+                return noteDTO.getTitle();
+            }
+        };
 
-		Column<NoteDTO, Date> dateCreatedColumn = new Column<NoteDTO, Date>(new DateCell()) {
-			@Override
-			public Date getValue(NoteDTO noteDTO) {
-				return noteDTO.getDateCreated();
-			}
-		};
+        Column<NoteDTO, Date> dateCreatedColumn = new Column<NoteDTO, Date>(new DateCell()) {
+            @Override
+            public Date getValue(NoteDTO noteDTO) {
+                return noteDTO.getDateCreated();
+            }
+        };
 
-		notesList.addColumn(titleColumn, "Title");
-		notesList.addColumn(dateCreatedColumn, "Created Date");
-		dataProvider.addDataDisplay(notesList);
-	}
+        notesList.addColumn(titleColumn, "Title");
+        notesList.addColumn(dateCreatedColumn, "Created Date");
+        dataProvider.addDataDisplay(notesList);
+    }
 
-	@UiHandler("searchButton")
-	void onSearchButtonClick(ClickEvent event) {
-		if (presenter != null) {
-			presenter.onSearchButtonClicked();
-		}
-	}
+    public void setUserDetails(UserDTO userDTO) {
+        usernameLabel.setText(userDTO.getUsername());
+    }
 
-	@UiHandler("searchBox")
-	void onSearchTextBoxPressed(ClickEvent event) {
-		if (presenter != null) {
-			presenter.onSearchTextBoxPressed();
-		}
-	}
 
-	@UiHandler("newNote")
-	void onNewNoteButtonClicked(ClickEvent event) {
-		if (presenter != null) {
-			presenter.onNewNoteButtonClicked();
-		}
-	}
+    @UiHandler("searchButton")
+    void onSearchButtonClick(ClickEvent event) {
+        if (presenter != null) {
+            presenter.onSearchButtonClicked();
+        }
+    }
 
-	@UiHandler("allNotes")
-	void onAllNotesButtonClicked(ClickEvent event) {
-		if (presenter != null) {
-			presenter.onAllNotesButtonClicked();
-		}
-	}
+    @UiHandler("searchBox")
+    void onSearchTextBoxPressed(ClickEvent event) {
+        if (presenter != null) {
+            presenter.onSearchTextBoxPressed();
+        }
+    }
 
-	@UiHandler("important")
-	void onImportantButtonClicked(ClickEvent event) {
-		if (presenter != null) {
-			presenter.onImportantButtonClicked();
-		}
-	}
+    @UiHandler("newNote")
+    void onNewNoteButtonClicked(ClickEvent event) {
+        if (presenter != null) {
+            presenter.onNewNoteButtonClicked();
+        }
+    }
 
-	@UiHandler("favorite")
-	void onFavoriteButtonClicked(ClickEvent event) {
-		if (presenter != null) {
-			presenter.onFavoriteButtonClicked();
-		}
-	}
+    @UiHandler("allNotes")
+    void onAllNotesButtonClicked(ClickEvent event) {
+        if (presenter != null) {
+            presenter.onAllNotesButtonClicked();
+        }
+    }
 
-	@UiHandler("recycleBin")
-	void onRecycleBinButtonClicked(ClickEvent event) {
-		if (presenter != null) {
-			presenter.onRecycleBinButtonClicked();
-		}
-	}
+    @UiHandler("important")
+    void onImportantButtonClicked(ClickEvent event) {
+        if (presenter != null) {
+            presenter.onImportantButtonClicked();
+        }
+    }
+
+    @UiHandler("favorite")
+    void onFavoriteButtonClicked(ClickEvent event) {
+        if (presenter != null) {
+            presenter.onFavoriteButtonClicked();
+        }
+    }
+
+    @UiHandler("recycleBin")
+    void onRecycleBinButtonClicked(ClickEvent event) {
+        if (presenter != null) {
+            presenter.onRecycleBinButtonClicked();
+        }
+    }
 
 /*	@UiHandler("notesList")
-	void onRowItemClicked(ClickEvent event) {
+    void onRowItemClicked(ClickEvent event) {
 		if (presenter != null) {
 			// TODO: простая заглушка. Необходимо реализовать выделение строки чекбоксом
 			presenter.onRowItemClicked(notesList.getVisibleItem(0));
@@ -180,22 +186,22 @@ public class MainPanel extends Composite implements NotesView {
 		}
 	}*/
 
-	@Override
-	public void setPresenter(Presenter presenter) {
-		this.presenter = presenter;
-	}
+    @Override
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
+    }
 
-	@Override
-	public void setRowData(List<NoteDTO> rowData) {
-		dataProvider.getList().clear();
-		dataProvider.getList().addAll(rowData);
-		dataProvider.flush();
-		dataProvider.refresh();
-		notesList.redraw();
-	}
+    @Override
+    public void setRowData(List<NoteDTO> rowData) {
+        dataProvider.getList().clear();
+        dataProvider.getList().addAll(rowData);
+        dataProvider.flush();
+        dataProvider.refresh();
+        notesList.redraw();
+    }
 
-	@Override
-	public Widget asWidget() {
-		return this;
-	}
+    @Override
+    public Widget asWidget() {
+        return this;
+    }
 }

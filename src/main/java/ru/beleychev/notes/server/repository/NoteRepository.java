@@ -17,7 +17,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 	 * @return {@code List<Note>} with defined userId
 	 */
 	@Transactional
-	@Query("select n from Note n where n.userId = ?1")
+	@Query("select n from Note n where n.userId = ?1 and n.deleted = 0")
 	List<Note> getNotes(Long id);
 
 	/**
@@ -25,7 +25,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 	 * @return favorite {@code List<Note>} with defined userId
 	 */
 	@Transactional
-	@Query("select n from Note n where n.userId = ?1 and n.favorite = 1")
+	@Query("select n from Note n where n.userId = ?1 and n.favorite = 1 and n.deleted = 0")
 	List<Note> getFavoriteNotes(Long id);
 
 	/**
@@ -33,7 +33,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 	 * @return important {@code List<Note>} with defined userId
 	 */
 	@Transactional
-	@Query("select n from Note n where n.userId = ?1 and n.important = 1")
+	@Query("select n from Note n where n.userId = ?1 and n.important = 1 and n.deleted = 0")
 	List<Note> getImportantNotes(Long id);
 
 	/**
