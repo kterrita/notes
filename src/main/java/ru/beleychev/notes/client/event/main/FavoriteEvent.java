@@ -1,4 +1,4 @@
-package ru.beleychev.notes.client.event;
+package ru.beleychev.notes.client.event.main;
 
 import com.google.gwt.event.shared.GwtEvent;
 

@@ -45,4 +45,9 @@ public interface NotesGwtService extends RemoteService {
 	 * @return deleted {@link NoteDTO} of current user, {@code null} if there is no notes in DB
 	 */
 	List<NoteDTO> getDeletedNotes();
+
+	/**
+	 * saving note to DB
+	 */
+	void saveNote(NoteDTO noteDTO);
 }

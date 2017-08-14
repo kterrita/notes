@@ -1,0 +1,22 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <ui:with field="res" type="ru.beleychev.notes.client.ui.Resources"/>
+    <g:PopupPanel ui:field="popupPanel" width="600px" modal="true" title="Edit Note" addStyleNames="{res.style.mainPanel}">
+        <g:VerticalPanel ui:field="newNoteMainPanel">
+            <g:HorizontalPanel ui:field="newNoteHeader">
+                <g:Label ui:field="storedNoteTitle" addStyleNames="{res.style.label}"/>
+                <g:DateLabel ui:field="noteCreatedDate" customFormat="EEE, MMM d, yyyy"
+                             addStyleNames="{res.style.label}"/>
+            </g:HorizontalPanel>
+            <g:VerticalPanel ui:field="contentPanel">
+                <g:TextBox ui:field="currentNoteTitle" addStyleNames="{res.style.searchBox}"/>
+                <g:RichTextArea ui:field="contentTextArea" focus="true"/>
+            </g:VerticalPanel>
+            <g:HorizontalPanel ui:field="newNoteFooter">
+                <g:CheckBox ui:field="favorite"/>
+                <g:Button ui:field="save" text="Save" addStyleNames="{res.style.button}"/>
+                <g:Button ui:field="close" text="Close" addStyleNames="{res.style.button}"/>
+            </g:HorizontalPanel>
+        </g:VerticalPanel>
+    </g:PopupPanel>
+</ui:UiBinder>

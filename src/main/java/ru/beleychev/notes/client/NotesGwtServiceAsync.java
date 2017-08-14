@@ -22,4 +22,6 @@ public interface NotesGwtServiceAsync {
 	void getImportantNotes(AsyncCallback<List<NoteDTO>> callback);
 
 	void getDeletedNotes(AsyncCallback<List<NoteDTO>> callback);
+
+	void saveNote(NoteDTO noteDTO, AsyncCallback<Void> callback);
 }

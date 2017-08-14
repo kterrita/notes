@@ -4,14 +4,16 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.view.client.SetSelectionModel;
 import ru.beleychev.notes.client.NotesGwtServiceAsync;
-import ru.beleychev.notes.client.common.SelectionModel;
-import ru.beleychev.notes.client.event.NewNoteEvent;
+import ru.beleychev.notes.client.event.main.EditNoteEvent;
+import ru.beleychev.notes.client.event.main.NewNoteEvent;
 import ru.beleychev.notes.client.view.NotesView;
 import ru.beleychev.notes.shared.dto.NoteDTO;
 import ru.beleychev.notes.shared.dto.UserDTO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Main page presenter
@@ -23,13 +25,11 @@ public class NotesPresenter implements Presenter, NotesView.Presenter {
     private final NotesGwtServiceAsync rpcService;
     private final HandlerManager eventBus;
     private final NotesView view;
-    private final SelectionModel selectionModel;
 
     public NotesPresenter(NotesGwtServiceAsync rpcService, HandlerManager eventBus, NotesView view) {
         this.rpcService = rpcService;
         this.eventBus = eventBus;
         this.view = view;
-        this.selectionModel = new SelectionModel();
         this.view.setPresenter(this);
     }
 
@@ -58,8 +58,22 @@ public class NotesPresenter implements Presenter, NotesView.Presenter {
 
     @Override
     public void onNewNoteButtonClicked() {
-        // TODO: созадть вьюху для новой записи
         eventBus.fireEvent(new NewNoteEvent());
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void onEditNoteButtonClicked() {
+        SetSelectionModel<NoteDTO> selectionModel = (SetSelectionModel<NoteDTO>) view.getData().getSelectionModel();
+        Set<NoteDTO> selectedRows = selectionModel.getSelectedSet();
+        if (selectedRows.size() == 1) {
+            NoteDTO selectedNote = selectedRows.iterator().next();
+            eventBus.fireEvent(new EditNoteEvent(selectedNote));
+        } else if (selectedRows.size() == 0) {
+            Window.alert("Please select at least 1 note.");
+        } else {
+            Window.alert("You cant edit more than one note at the same time, please check only one note to edit.");
+        }
     }
 
     @Override
@@ -80,16 +94,6 @@ public class NotesPresenter implements Presenter, NotesView.Presenter {
     @Override
     public void onRecycleBinButtonClicked() {
         fillDeletedNotes();
-    }
-
-    @Override
-    public void onRowItemClicked(NoteDTO clickedItem) {
-
-    }
-
-    @Override
-    public void onRowItemSelected(NoteDTO selectedItem) {
-
     }
 
     /**

@@ -1,5 +1,6 @@
 package ru.beleychev.notes.client.ui;
 
+import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.DateCell;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
@@ -8,6 +9,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.ColumnSortEvent;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -18,8 +20,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.*;
 import ru.beleychev.notes.client.view.NotesView;
+import ru.beleychev.notes.client.widget.CustomDataGrid;
 import ru.beleychev.notes.shared.dto.NoteDTO;
 import ru.beleychev.notes.shared.dto.UserDTO;
 
@@ -61,6 +64,8 @@ public class MainPanel extends Composite implements NotesView {
     @UiField
     Label newNote;
     @UiField
+    Button editNote;
+    @UiField
     Label allNotes;
     @UiField
     Label important;
@@ -68,8 +73,8 @@ public class MainPanel extends Composite implements NotesView {
     Label favorite;
     @UiField
     Label recycleBin;
-    @UiField
-    DataGrid<NoteDTO> notesList;
+    @UiField(provided = true)
+    CustomDataGrid notesList;
     @UiField
     Resources res;
     private ListDataProvider<NoteDTO> dataProvider = new ListDataProvider<>();
@@ -80,7 +85,8 @@ public class MainPanel extends Composite implements NotesView {
         Resources.INSTANCE.style().ensureInjected();
     }
 
-    public MainPanel() {
+    public MainPanel(CustomDataGrid customDataGrid) {
+        this.notesList = customDataGrid;
         initWidget(ourUiBinder.createAndBindUi(this));
         setupNorthPanel();
         setupSouthPanel();
@@ -97,23 +103,7 @@ public class MainPanel extends Composite implements NotesView {
     }
 
     private void setupCenterPanel() {
-        Column<NoteDTO, String> titleColumn = new Column<NoteDTO, String>(new TextCell()) {
-            @Override
-            public String getValue(NoteDTO noteDTO) {
-                return noteDTO.getTitle();
-            }
-        };
-
-        Column<NoteDTO, Date> dateCreatedColumn = new Column<NoteDTO, Date>(new DateCell()) {
-            @Override
-            public Date getValue(NoteDTO noteDTO) {
-                return noteDTO.getDateCreated();
-            }
-        };
-
-        notesList.addColumn(titleColumn, "Title");
-        notesList.addColumn(dateCreatedColumn, "Created Date");
-        dataProvider.addDataDisplay(notesList);
+        dataProvider.addDataDisplay(notesList.getNotesList());
     }
 
     public void setUserDetails(UserDTO userDTO) {
@@ -139,6 +129,13 @@ public class MainPanel extends Composite implements NotesView {
     void onNewNoteButtonClicked(ClickEvent event) {
         if (presenter != null) {
             presenter.onNewNoteButtonClicked();
+        }
+    }
+
+    @UiHandler("editNote")
+    void onEditNoteButtonClicked(ClickEvent event) {
+        if (presenter != null) {
+            presenter.onEditNoteButtonClicked();
         }
     }
 
@@ -170,22 +167,6 @@ public class MainPanel extends Composite implements NotesView {
         }
     }
 
-/*	@UiHandler("notesList")
-    void onRowItemClicked(ClickEvent event) {
-		if (presenter != null) {
-			// TODO: простая заглушка. Необходимо реализовать выделение строки чекбоксом
-			presenter.onRowItemClicked(notesList.getVisibleItem(0));
-		}
-	}
-
-	@UiHandler("notesList")
-	void onRowItemSelected(ClickEvent event) {
-		if (presenter != null) {
-			// TODO: простая заглушка. Необходимо реализовать логику Обработки выбранных строк
-			presenter.onRowItemSelected(notesList.getVisibleItem(0));
-		}
-	}*/
-
     @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
@@ -197,11 +178,16 @@ public class MainPanel extends Composite implements NotesView {
         dataProvider.getList().addAll(rowData);
         dataProvider.flush();
         dataProvider.refresh();
-        notesList.redraw();
+        notesList.getNotesList().redraw();
     }
 
     @Override
     public Widget asWidget() {
         return this;
+    }
+
+    @Override
+    public DataGrid<NoteDTO> getData() {
+        return notesList.getNotesList();
     }
 }

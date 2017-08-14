@@ -6,15 +6,17 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
-import ru.beleychev.notes.client.event.AllNotesEvent;
-import ru.beleychev.notes.client.event.DeletedNotesEvent;
-import ru.beleychev.notes.client.event.FavoriteEvent;
-import ru.beleychev.notes.client.event.ImportantEvent;
+import ru.beleychev.notes.client.event.main.*;
+import ru.beleychev.notes.client.presenter.EditNotePresenter;
 import ru.beleychev.notes.client.presenter.NotesPresenter;
 import ru.beleychev.notes.client.presenter.Presenter;
 import ru.beleychev.notes.client.ui.MainPanel;
+import ru.beleychev.notes.client.ui.NewNotePopupPanel;
 import ru.beleychev.notes.client.view.NotesView;
+import ru.beleychev.notes.client.widget.CustomDataGrid;
+import ru.beleychev.notes.shared.dto.NoteDTO;
 
 /**
  * GWT controller
@@ -27,7 +29,7 @@ public class ClientSideController implements Presenter, ValueChangeHandler<Strin
     private HasWidgets container;
     private NotesView view = null;
 
-    public ClientSideController(HandlerManager eventBus, NotesGwtServiceAsync rpcService) {
+    ClientSideController(HandlerManager eventBus, NotesGwtServiceAsync rpcService) {
         this.eventBus = eventBus;
         this.rpcService = rpcService;
         bind();
@@ -35,6 +37,8 @@ public class ClientSideController implements Presenter, ValueChangeHandler<Strin
 
     private void bind() {
         History.addValueChangeHandler(this);
+        eventBus.addHandler(NewNoteEvent.TYPE, event -> doAddNote());
+        eventBus.addHandler(EditNoteEvent.TYPE, event -> doEditNote(event.getNoteDTO()));
         eventBus.addHandler(AllNotesEvent.TYPE, event -> doAllNotes());
         eventBus.addHandler(FavoriteEvent.TYPE, event -> doAllNotes());
         eventBus.addHandler(ImportantEvent.TYPE, event -> doAllNotes());
@@ -42,7 +46,19 @@ public class ClientSideController implements Presenter, ValueChangeHandler<Strin
     }
 
     private void doAllNotes() {
-        History.newItem("all");
+        History.newItem("main");
+    }
+
+    private void doEditNote(NoteDTO noteDTO) {
+        History.newItem("edit", false);
+        Presenter presenter = new EditNotePresenter(rpcService, eventBus, new NewNotePopupPanel(), noteDTO);
+        presenter.go(container);
+    }
+
+    private void doAddNote() {
+        History.newItem("add");
+        Presenter presenter = new EditNotePresenter(rpcService, eventBus, new NewNotePopupPanel());
+        presenter.go(container);
     }
 
     @Override
@@ -50,7 +66,7 @@ public class ClientSideController implements Presenter, ValueChangeHandler<Strin
         this.container = container;
 
         if ("".equals(History.getToken())) {
-            History.newItem("all");
+            History.newItem("main");
         } else {
             History.fireCurrentHistoryState();
         }
@@ -61,17 +77,17 @@ public class ClientSideController implements Presenter, ValueChangeHandler<Strin
         String token = event.getValue();
 
         if (token != null) {
-            if (token.equals("all")) {
+            if (token.equals("main")) {
                 GWT.runAsync(new RunAsyncCallback() {
                     @Override
                     public void onFailure(Throwable reason) {
-
+                        Window.alert("Cannot build UI");
                     }
 
                     @Override
                     public void onSuccess() {
                         if (view == null) {
-                            view = new MainPanel();
+                            view = new MainPanel(new CustomDataGrid());
                         }
                         new NotesPresenter(rpcService, eventBus, view)
                                 .go(container);
